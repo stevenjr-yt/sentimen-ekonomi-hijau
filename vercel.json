@@ -1,9 +1,7 @@
 {
   "version": 2,
-  "name": "sentimentgreen",
   "public": true,
   "outputDirectory": "web",
-  "buildCommand": "",
   "framework": null,
   "headers": [
     {
@@ -13,8 +11,5 @@
         { "key": "Content-Disposition", "value": "attachment" }
       ]
     }
-  ],
-  "routes": [
-    { "src": "/(.*)", "dest": "/$1" }
   ]
 }
