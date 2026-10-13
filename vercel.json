@@ -3,6 +3,8 @@
   "name": "sentimentgreen",
   "public": true,
   "outputDirectory": "web",
+  "buildCommand": "",
+  "framework": null,
   "headers": [
     {
       "source": "/downloads/(.*\\.pdf)",
