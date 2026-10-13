@@ -718,9 +718,9 @@ export_data = {
   <section class="section" id="downloads">
     <div class="container">
       <div class="section-header">
-        <div class="section-tag">📥 Unduhan Dokumen</div>
-        <h2 class="section-title">Download Dokumen Proyek</h2>
-        <p class="section-sub">Unduh laporan lengkap, paper jurnal, dan studi literatur dalam format PDF.</p>
+        <div class="section-tag">📥 Akses Dokumen Lengkap</div>
+        <h2 class="section-title">Baca Online &amp; Unduh Dokumen Proyek</h2>
+        <p class="section-sub">Bisa langsung baca online di browser (PDF viewer interaktif) atau unduh dalam format PDF dan Word (.docx).</p>
       </div>
       <div class="downloads-grid">
 
@@ -732,22 +732,28 @@ export_data = {
           <div class="dl-body">
             <div class="dl-badge">Laporan Proyek</div>
             <h3 class="dl-title">Laporan Teknis Lengkap</h3>
-            <p class="dl-desc">Laporan proyek lengkap: latar belakang, metodologi, hasil evaluasi model, analisis distribusi sentimen, dan kesimpulan. Disertai semua rumus matematika TF-IDF, Naive Bayes, dan SVM.</p>
+            <p class="dl-desc">Laporan proyek komprehensif: latar belakang, arsitektur model, implementasi koding Python/JS, evaluasi model, dan pembuktian rumus matematika lengkap.</p>
             <div class="dl-meta">
               <span class="dl-tag">📊 5 Bab</span>
               <span class="dl-tag">🧮 Rumus Lengkap</span>
               <span class="dl-tag">📈 Hasil Evaluasi</span>
             </div>
           </div>
-          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <a href="downloads/Laporan_Project.pdf" download="Laporan_Project_SentimentGreen.pdf" target="_blank" class="btn-dl" style="flex: 1;" id="dlLaporan">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Unduh PDF
+          <div style="display: flex; flex-direction: column; width: 100%;">
+            <a href="downloads/Laporan_Project.pdf" target="_blank" class="btn-view-online" id="viewLaporan">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+              📖 Baca Online (PDF) ↗
             </a>
-            <a href="downloads/Laporan_Project.docx" download="Laporan_Project_SentimentGreen.docx" target="_blank" class="btn-dl" style="flex: 1; background: linear-space; background: #1e3a8a; color: #93c5fd;" id="dlLaporanDocx">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-              Unduh Word (.docx)
-            </a>
+            <div style="display: flex; gap: 8px;">
+              <a href="downloads/Laporan_Project.pdf" download="Laporan_Project_SentimentGreen.pdf" class="btn-dl" style="flex: 1; padding: 9px 12px; font-size: 0.82rem;" id="dlLaporan">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Unduh PDF
+              </a>
+              <a href="downloads/Laporan_Project.docx" download="Laporan_Project_SentimentGreen.docx" class="btn-dl-secondary" style="flex: 1;" id="dlLaporanDocx">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Unduh Word (.docx)
+              </a>
+            </div>
           </div>
         </div>
 
@@ -759,22 +765,28 @@ export_data = {
           <div class="dl-body">
             <div class="dl-badge dl-badge-blue">Paper Jurnal</div>
             <h3 class="dl-title">Paper Ilmiah – Format Jurnal</h3>
-            <p class="dl-desc">Artikel ilmiah format jurnal: abstrak Indonesia &amp; Inggris, pendahuluan, metode penelitian, hasil &amp; pembahasan, kesimpulan, dan daftar pustaka. Siap untuk publikasi akademik.</p>
+            <p class="dl-desc">Artikel ilmiah standar jurnal: abstrak dwibahasa (ID &amp; EN), metodologi ekstraksi fitur, komparasi SVM vs MNB, arsitektur zero-server client-side, dan daftar pustaka.</p>
             <div class="dl-meta">
               <span class="dl-tag">🔬 Metode Ilmiah</span>
               <span class="dl-tag">📋 Format Jurnal</span>
               <span class="dl-tag">📚 10 Referensi</span>
             </div>
           </div>
-          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <a href="downloads/Paper_Jurnal.pdf" download="Paper_Jurnal_SentimentGreen.pdf" target="_blank" class="btn-dl btn-dl-blue" style="flex: 1;" id="dlPaper">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Unduh PDF
+          <div style="display: flex; flex-direction: column; width: 100%;">
+            <a href="downloads/Paper_Jurnal.pdf" target="_blank" class="btn-view-online" id="viewPaper">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+              📖 Baca Online (PDF) ↗
             </a>
-            <a href="downloads/Paper_Jurnal.docx" download="Paper_Jurnal_SentimentGreen.docx" target="_blank" class="btn-dl" style="flex: 1; background: #1e3a8a; color: #93c5fd;" id="dlPaperDocx">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-              Unduh Word (.docx)
-            </a>
+            <div style="display: flex; gap: 8px;">
+              <a href="downloads/Paper_Jurnal.pdf" download="Paper_Jurnal_SentimentGreen.pdf" class="btn-dl btn-dl-blue" style="flex: 1; padding: 9px 12px; font-size: 0.82rem;" id="dlPaper">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Unduh PDF
+              </a>
+              <a href="downloads/Paper_Jurnal.docx" download="Paper_Jurnal_SentimentGreen.docx" class="btn-dl-secondary" style="flex: 1;" id="dlPaperDocx">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Unduh Word (.docx)
+              </a>
+            </div>
           </div>
         </div>
 
@@ -785,23 +797,29 @@ export_data = {
           </div>
           <div class="dl-body">
             <div class="dl-badge dl-badge-purple">Studi Literatur</div>
-            <h3 class="dl-title">Literature Review – Jurnal 2024</h3>
-            <p class="dl-desc">Tinjauan literatur 10 referensi terpilih (2024–2026) tentang analisis sentimen isu lingkungan &amp; ekonomi hijau. Mencakup gap analisis, tren metodologi, dan justifikasi pemilihan SVM sebagai model utama.</p>
+            <h3 class="dl-title">Systematic Literature Review</h3>
+            <p class="dl-desc">Kajian literatur 10 jurnal terakreditasi SINTA &amp; Scopus (2024–2026). Analisis 5 research gap, perbandingan metodologis, dan justifikasi ilmiah pemilihan Linear SVM.</p>
             <div class="dl-meta">
               <span class="dl-tag">📖 10 Jurnal</span>
               <span class="dl-tag">📅 2024–2026</span>
               <span class="dl-tag">🔍 Gap Analisis</span>
             </div>
           </div>
-          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <a href="downloads/Studi_Literatur.pdf" download="Studi_Literatur_SentimentGreen.pdf" target="_blank" class="btn-dl btn-dl-purple" style="flex: 1;" id="dlLiteratur">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Unduh PDF
+          <div style="display: flex; flex-direction: column; width: 100%;">
+            <a href="downloads/Studi_Literatur.pdf" target="_blank" class="btn-view-online" id="viewLiteratur">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+              📖 Baca Online (PDF) ↗
             </a>
-            <a href="downloads/Studi_Literatur.docx" download="Studi_Literatur_SentimentGreen.docx" target="_blank" class="btn-dl" style="flex: 1; background: #1e3a8a; color: #93c5fd;" id="dlLiteraturDocx">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-              Unduh Word (.docx)
-            </a>
+            <div style="display: flex; gap: 8px;">
+              <a href="downloads/Studi_Literatur.pdf" download="Studi_Literatur_SentimentGreen.pdf" class="btn-dl btn-dl-purple" style="flex: 1; padding: 9px 12px; font-size: 0.82rem;" id="dlLiteratur">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Unduh PDF
+              </a>
+              <a href="downloads/Studi_Literatur.docx" download="Studi_Literatur_SentimentGreen.docx" class="btn-dl-secondary" style="flex: 1;" id="dlLiteraturDocx">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Unduh Word (.docx)
+              </a>
+            </div>
           </div>
         </div>
 
