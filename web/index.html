@@ -24,6 +24,7 @@
         <li><a href="#analyze">Analisis</a></li>
         <li><a href="#dashboard">Dashboard</a></li>
         <li><a href="#methodology">Metodologi</a></li>
+        <li><a href="#literatur">Studi Literatur</a></li>
         <li><a href="#downloads">Unduhan</a></li>
         <li><a href="#about">Tentang</a></li>
       </ul>
@@ -343,6 +344,99 @@ Macro-Avg = (Nilai_Neg + Nilai_Net + Nilai_Pos) / 3
           </ul>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── STUDI LITERATUR & GAP ANALISIS ──────────────────────────── -->
+  <section class="section section-dark" id="literatur">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">📚 Systematic Literature Review 2024</div>
+        <h2 class="section-title">Studi Literatur &amp; Analisis Kesenjangan Riset</h2>
+        <p class="section-sub">Perbandingan komprehensif antara penelitian terkini (2024) di domain NLP &amp; sentimen lingkungan dengan inovasi proyek SentimentGreen.</p>
+      </div>
+
+      <!-- Tabel Komparasi Jurnal -->
+      <div class="table-card" style="margin-bottom: 32px; overflow-x: auto;">
+        <h3 style="font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 16px;">
+          📊 Matriks Perbandingan Metode, Dataset &amp; Kinerja Antar Jurnal
+        </h3>
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.84rem; text-align: left;">
+          <thead>
+            <tr style="background: rgba(5, 150, 105, 0.2); border-bottom: 2px solid var(--green);">
+              <th style="padding: 12px; color: var(--green);">Penulis &amp; Jurnal</th>
+              <th style="padding: 12px; color: var(--green);">Metode &amp; Fitur</th>
+              <th style="padding: 12px; color: var(--green);">Dataset &amp; Skala</th>
+              <th style="padding: 12px; color: var(--green);">Hasil Akurasi</th>
+              <th style="padding: 12px; color: var(--green);">Kelemahan &amp; Research Gap</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--border); background: var(--surface);">
+              <td style="padding: 12px;"><strong>Merdiansah et al. (2024)</strong><br /><span style="color: var(--text3); font-size: 0.76rem;">JIKOMSI Vol. 7(1)</span></td>
+              <td style="padding: 12px;">IndoBERT Base + Fine-tuning IndoNLU</td>
+              <td style="padding: 12px;">Tweet X Indonesia (Kendaraan Listrik)</td>
+              <td style="padding: 12px; color: var(--green); font-weight: bold;">Fine-tuning Unggul</td>
+              <td style="padding: 12px; color: var(--text2);">Topik hanya sempit pada EV. Model sangat berat (>400MB), wajib GPU, tidak ada web live deployment.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.02);">
+              <td style="padding: 12px;"><strong>Hendrawan &amp; Kusmiyati (2024)</strong><br /><span style="color: var(--text3); font-size: 0.76rem;">CESS Vol. 9(1)</span></td>
+              <td style="padding: 12px;">Multinomial NB vs Linear SVM (TF-IDF)</td>
+              <td style="padding: 12px;">Tweet X Indonesia (EV &amp; Regulasi)</td>
+              <td style="padding: 12px; color: var(--green); font-weight: bold;">SVM Unggul Konsisten</td>
+              <td style="padding: 12px; color: var(--text2);">Tidak ada penyeimbang bobot kelas (imbalance). Berhenti di eksperimen skrip Python lokal.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border); background: var(--surface);">
+              <td style="padding: 12px;"><strong>Prameswari et al. (2024)</strong><br /><span style="color: var(--text3); font-size: 0.76rem;">Innovative Vol. 4(4)</span></td>
+              <td style="padding: 12px;">SVM, Naive Bayes, Random Forest (TF-IDF)</td>
+              <td style="padding: 12px;">Tweet X Indonesia (Mobil Listrik)</td>
+              <td style="padding: 12px; color: var(--green); font-weight: bold;">SVM Terbaik</td>
+              <td style="padding: 12px; color: var(--text2);">Evaluasi hanya Accuracy global dan mengabaikan Macro F1. Tidak ada implementasi web publik.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.02);">
+              <td style="padding: 12px;"><strong>Hidayatullah et al. (2024)</strong><br /><span style="color: var(--text3); font-size: 0.76rem;">JournalISI Vol. 6(3)</span></td>
+              <td style="padding: 12px;">FastText Embedding + IndoBERT</td>
+              <td style="padding: 12px;">119.000 Tweet EV (2020–2023)</td>
+              <td style="padding: 12px; color: var(--green); font-weight: bold;">82,50% Akurasi</td>
+              <td style="padding: 12px; color: var(--text2);">Menuntut server backend berdaya tinggi. Tidak dapat dijalankan secara instan di peramban web offline.</td>
+            </tr>
+            <tr style="border-bottom: 2px solid var(--green); background: rgba(5, 150, 105, 0.1);">
+              <td style="padding: 12px;"><strong>SentimentGreen (2024)</strong><br /><span style="color: var(--green); font-weight: bold;">[Proyek Platform Ini]</span></td>
+              <td style="padding: 12px;">TF-IDF (1,2) + Linear SVM (Balanced) &amp; MNB</td>
+              <td style="padding: 12px;">31.907 Tweet Iklim Bersih (Kaggle Edward Qian)</td>
+              <td style="padding: 12px; color: var(--green); font-weight: bold;">74,07% (Macro F1 65,81%)</td>
+              <td style="padding: 12px; color: #fff;"><strong>Menutup 5 Gap:</strong> Domain holistik (ekonomi hijau luas), atasi imbalance, inferensi 100% offline di browser tanpa server!</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 5 Kesenjangan Riset (The 5 Research Gaps) -->
+      <h3 style="font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 20px;">
+        🎯 5 Kesenjangan Riset Utama yang Dijawab oleh SentimentGreen:
+      </h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px;">
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px;">
+          <h4 style="color: var(--green); margin-bottom: 8px; font-size: 0.92rem;">1. Kesenjangan Topik (Thematic Scope Gap)</h4>
+          <p style="font-size: 0.82rem; color: var(--text2); line-height: 1.55;">Semua jurnal 2024 hanya fokus sempit pada kendaraan listrik (EV). SentimentGreen memperluas ke seluruh pilar ekonomi hijau (energi surya, angin, pajak karbon, dan dekarbonisasi).</p>
+        </div>
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px;">
+          <h4 style="color: var(--blue); margin-bottom: 8px; font-size: 0.92rem;">2. Kesenjangan Skala Data (Scale &amp; Language Gap)</h4>
+          <p style="font-size: 0.82rem; color: var(--text2); line-height: 1.55;">Sebagian besar penelitian lokal memakai data kecil (&lt;2.000 tweet). SentimentGreen mengkaji korpus global berskala besar (31.907 tweet) dengan durasi 11 tahun (2008–2019).</p>
+        </div>
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px;">
+          <h4 style="color: #a78bfa; margin-bottom: 8px; font-size: 0.92rem;">3. Kesenjangan Deployment (Zero-Server Gap)</h4>
+          <p style="font-size: 0.82rem; color: var(--text2); line-height: 1.55;">Jurnal-jurnal lain hanya berhenti di file Python / Google Colab. SentimentGreen mengekspor model ke JSON murni sehingga inferensi AI berjalan 100% offline di browser pengguna.</p>
+        </div>
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px;">
+          <h4 style="color: #fbbf24; margin-bottom: 8px; font-size: 0.92rem;">4. Kesenjangan Imbalance (Class Imbalance Gap)</h4>
+          <p style="font-size: 0.82rem; color: var(--text2); line-height: 1.55;">Banyak studi mengabaikan metrik Macro F1. SentimentGreen menerapkan <code>class_weight='balanced'</code> pada SVM, mendongkrak recall kelas negatif dari 34,81% menjadi 60,13%!</p>
+        </div>
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px;">
+          <h4 style="color: #34d399; margin-bottom: 8px; font-size: 0.92rem;">5. Kesenjangan Replikasi (Pipeline Replication Gap)</h4>
+          <p style="font-size: 0.82rem; color: var(--text2); line-height: 1.55;">Menjamin logika tokenisasi, 127 stopword removal, dan algoritma Porter Stemmer berjalan 100% identik bit-demi-bit antara Python training dan JavaScript runtime browser.</p>
+        </div>
       </div>
     </div>
   </section>
