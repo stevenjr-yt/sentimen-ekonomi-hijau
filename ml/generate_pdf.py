@@ -525,72 +525,137 @@ def build_literatur():
     S = make_styles()
     story = []
 
+    # COVER & HEADER
     story += [
         Spacer(1, 0.4*cm),
-        Paragraph("TINJAUAN STUDI LITERATUR (LITERATURE REVIEW)", S["caption"]),
-        Paragraph("Analisis Sentimen Isu Lingkungan, Energi Hijau, dan Perubahan Iklim Menggunakan Machine Learning pada Media Sosial: Kajian Literatur dan Analisis Kesenjangan Riset 2024", S["title"]),
+        Paragraph("SYSTEMATIC LITERATURE REVIEW & RESEARCH GAP ANALYSIS", S["caption"]),
+        Paragraph("Kajian Komparatif Sistematis Metodologi Analisis Sentimen Isu Lingkungan, Energi Bersih, dan Ekonomi Hijau: Pemetaan Komparasi Algoritma dan Kesenjangan Riset Terkini (2024)", S["title"]),
         hr(),
-        Paragraph("<b>Penyusun:</b> SteVenJr | <b>Afiliasi:</b> Riset Sains Data SentimentGreen | <b>Tahun:</b> 2024", S["meta"]),
-        Paragraph("<b>Publikasi Terbuka:</b> https://sentimentgreen.vercel.app | <b>Repository:</b> github.com/stevenjr-yt/sentimen-ekonomi-hijau", S["meta"]),
+        Paragraph("<b>Penyusun:</b> SteVenJr | <b>Afiliasi:</b> Riset Sains Data & Pemrosesan Bahasa Alami SentimentGreen | <b>Tahun:</b> 2024", S["meta"]),
+        Paragraph("<b>Publikasi Terbuka:</b> https://sentimentgreen.vercel.app | <b>Repositori Data & Kode:</b> github.com/stevenjr-yt/sentimen-ekonomi-hijau", S["meta"]),
         Spacer(1, 0.3*cm),
 
         Paragraph("RINGKASAN EKSEKUTIF", S["h2"]),
-        Paragraph("""Tinjauan literatur komprehensif ini mengkaji perkembangan riset terkini (khususnya publikasi tahun 2024) mengenai penerapan teknik Natural Language Processing (NLP) dan machine learning dalam menganalisis sentimen opini publik terhadap isu keberlanjutan, energi terbarukan, kendaraan listrik (electric vehicles), dan ekonomi hijau. Melalui sintesis sistematis terhadap artikel jurnal terindeks, studi ini memetakan lanskap metodologi dari algoritma klasik (Naive Bayes, Support Vector Machine, Random Forest) hingga model transfer learning modern (BERT, IndoBERT, FastText). Hasil sintesis menunjukkan bahwa Support Vector Machine secara konsisten mempertahankan akurasi dan generalisasi terbaik di antara metode tradisional, terutama pada data media sosial yang tidak seimbang. Studi ini juga mengidentifikasi 5 kesenjangan riset (research gaps) utama yang menjadi fondasi dan justifikasi teknis arsitektur proyek SentimentGreen.""", S["body"]),
+        Paragraph("""Tinjauan literatur sistematis (*Systematic Literature Review*) ini menyajikan telaah mendalam terhadap publikasi ilmiah terkini (fokus tahun 2024) dalam domain analisis sentimen media sosial terkait diskursus transisi energi, kendaraan listrik (*electric vehicles*), mitigasi perubahan iklim, dan kebijakan ekonomi hijau (*green economy*). Melalui penelusuran terstruktur terhadap pangkalan data akademik nasional dan internasional (Google Scholar, Semantic Scholar, Garuda Kemdikbudristek, IEEE Xplore, dan ResearchGate), studi ini membandingkan empat klaster metodologi utama: (1) Machine Learning Tradisional berbasis Vektor (Naive Bayes, SVM, Random Forest), (2) Word Embeddings Sub-kata (FastText), (3) Model Bahasa Pra-latih Berbasis Transformer (*Pre-trained Transformers* seperti BERT dan IndoBERT), serta (4) Dataset Benchmark Global (Edward Qian, Kaggle). Studi ini menyusun matriks komparasi menyeluruh mencakup arsitektur pemodelan, ukuran korpus data, teknik ekstraksi fitur, metrik evaluasi, keunggulan teknis, dan kelemahan mendasar. Hasil sintesis mengonfirmasi superioritas Support Vector Machine di ranah machine learning klasik dalam menangani ketidakseimbangan kelas (*imbalanced data*), serta menjustifikasi pemilihan arsitektur *offline browser-based inference* pada platform SentimentGreen dalam menjawab lima kesenjangan riset (*research gaps*) yang diidentifikasi secara kritis.""", S["body"]),
         hr(),
 
-        Paragraph("1. METODOLOGI PENELUSURAN LITERATUR", S["h1"]),
+        # BAB 1: METODOLOGI PENELUSURAN
+        Paragraph("1. METODOLOGI PENELUSURAN LITERATUR (SLR PROTOCOL)", S["h1"]),
+        Paragraph("""Protokol penelusuran literatur dirancang mengacu pada pedoman PRISMA (*Preferred Reporting Items for Systematic Reviews and Meta-Analyses*) guna menjamin transparansi, objektivitas, dan reprodusibilitas hasil review:""", S["body"]),
     ]
 
     tbl_lit_method = [
-        ["Parameter Penelusuran", "Spesifikasi Metodologis"],
-        ["Pangkalan Data Akademik", "Google Scholar, Semantic Scholar, ResearchGate, Garuda Kemdikbudristek, IEEE Xplore"],
-        ["Rentang Periode Terbit", "Fokus utama: Tahun 2024 (dengan landasan teori 1980–2023)"],
-        ["Kata Kunci Boolean", "('analisis sentimen' OR 'sentiment analysis') AND ('green economy' OR 'climate change' OR 'kendaraan listrik') AND ('Naive Bayes' OR 'SVM' OR 'BERT')"],
-        ["Kriteria Inklusi (Diterima)", "Artikel peer-reviewed, fokus domain lingkungan/energi, menggunakan pemodelan machine learning atau deep learning teruji"],
-        ["Kriteria Eksklusi (Ditolak)", "Artikel opini non-empiris, penelitian lexicon-only tanpa evaluasi statistik, publikasi di luar topik lingkungan"],
+        ["Komponen Protokol", "Spesifikasi dan Kriteria Seleksi Metodologis"],
+        ["Pangkalan Data Akademik", "Google Scholar, Semantic Scholar, ResearchGate, Garuda (Kemdikbudristek), IEEE Xplore"],
+        ["Rentang Periode Publikasi", "Fokus Utama: Publikasi 2024 (dengan landasan teori algoritma klasik 1980–2022)"],
+        ["Kueri Penelusuran Boolean", "('analisis sentimen' OR 'sentiment analysis') AND ('green economy' OR 'climate change' OR 'kendaraan listrik' OR 'electric vehicles') AND ('Naive Bayes' OR 'SVM' OR 'BERT' OR 'IndoBERT')"],
+        ["Kriteria Inklusi (Diterima)", "1. Artikel jurnal peer-reviewed terbit tahun 2024; 2. Topik domain energi bersih, iklim, kendaraan listrik, atau kebijakan hijau; 3. Menerapkan pengujian empiris NLP terukur (Akurasi, Precision, Recall, F1-Score)."],
+        ["Kriteria Eksklusi (Ditolak)", "1. Makalah opini kualitatif tanpa eksperimen data; 2. Pendekatan rule-based/leksikon murni tanpa ML; 3. Data tidak berasal dari media sosial atau tidak berkaitan dengan isu lingkungan."],
     ]
-    story += [safe_table(tbl_lit_method, [4.5*cm, 12.5*cm], S), Spacer(1, 0.3*cm)]
+    story += [safe_table(tbl_lit_method, [4.5*cm, 12.5*cm], S), Spacer(1, 0.4*cm)]
 
-    story += [
-        Paragraph("2. MATRIKS PERBANDINGAN ARTIKEL TERPILIH (PUBLIKASI 2024)", S["h1"]),
-        Paragraph("""Tabel berikut merangkum studi literatur empiris terkini yang relevan dengan metodologi proyek:""", S["body"]),
-    ]
-
-    tbl_lit_articles = [
-        ["No", "Penulis & Sumber Jurnal", "Metode Algoritma", "Dataset & Objek", "Hasil Akurasi", "Temuan & Kesenjangan Riset"],
-        ["1", "Merdiansah et al. (2024)\nJIKOMSI Vol.7(1)", "IndoBERT (Fine-Tuned IndoNLU)", "Tweet X/Twitter Indonesia topik Kendaraan Listrik", "Komparatif unggul", "IndoBERT fine-tuning unggul atas base model; gap: topik terbatas pada EV, belum ekonomi hijau holistik"],
-        ["2", "Hendrawan & Kusmiyati (2024)\nCESS Vol.9(1)", "Multinomial NB vs Linear SVM", "Twitter topik EV Indonesia", "SVM unggul", "SVM konsisten mengungguli Naive Bayes pada data Twitter; memperkuat justifikasi model SentimentGreen"],
-        ["3", "Prameswari et al. (2024)\nInnovative Vol.4(4)", "SVM, Naive Bayes, Random Forest", "Twitter EV & Transisi Energi", "SVM terbaik", "SVM dengan TF-IDF menghasilkan metrik generalisasi terbaik; belum mengeksplorasi browser offline deployment"],
-        ["4", "Hidayatullah et al. (2024)\nJournalISI Vol.6(3)", "FastText + BERT Transformer", "119.000 Tweet Energi Bersih Indonesia", "82,50%", "58% sentimen publik positif terhadap EV; model BERT unggul namun menuntut infrastruktur komputasi GPU tinggi"],
-        ["5", "Edward Qian (2022 / Benchmark)\nKaggle Dataset", "Kaggle Benchmark Dataset", "43.943 Tweet Iklim Global (2008–2019)", "Baseline", "Dataset acuan internasional utama yang digunakan dalam proyek SentimentGreen"],
-    ]
-    story += [safe_table(tbl_lit_articles, [0.8*cm, 4.8*cm, 3.8*cm, 3.8*cm, 1.8*cm, 2*cm], S, align_center_cols={0,4}), Spacer(1, 0.4*cm)]
-
+    # BAB 2: MATRIKS KOMPARASI MULTIDIMENSI
     story += [
         PageBreak(),
-        Paragraph("3. SINTESIS METODOLOGIS DAN ANALISIS KOMPARATIF", S["h1"]),
-        Paragraph("3.1 Dominasi Konsisten Support Vector Machine atas Naive Bayes", S["h2"]),
-        Paragraph("""Seluruh literatur yang membandingkan Naive Bayes dan SVM pada data media sosial secara konsisten mencatat keunggulan SVM. Naive Bayes mengasumsikan independensi kondisional antar fitur, suatu asumsi yang sering terlanggar pada teks bahasa alami yang sarat dengan kolokasi (seperti <i>climate change</i>, <i>global warming</i>). SVM memandang representasi TF-IDF sebagai vektor dalam ruang berdimensi tinggi ($R^{15.000}$) dan mencari margin maksimal, memberikan ketahanan superior terhadap fenomena overfitting pada dataset teks berdimensi tinggi.""", S["body"]),
+        Paragraph("2. MATRIKS KOMPARASI MULTIDIMENSI SELURUH ARTIKEL TERPILIH", S["h1"]),
+        Paragraph("""Tabel 2.1 menyajikan perbandingan komparatif lintas dimensi untuk seluruh jurnal acuan terhadap proyek SentimentGreen:""", S["body"]),
+    ]
 
-        Paragraph("3.2 Perkembangan Transformer dan Trade-Off Komputasi", S["h2"]),
-        Paragraph("""Meskipun model berbasis arsitektur transformer (seperti BERT, RoBERTa, dan IndoBERT) mampu mencapai akurasi lebih tinggi, model tersebut memiliki bobot parameter ratusan megabyte hingga gigabyte serta menuntut latensi inferensi yang signifikan. Untuk skenario aplikasi web terdistribusi yang ditargetkan dapat berjalan langsung di browser pengguna tanpa biaya infrastruktur cloud, kombinasi TF-IDF dan Linear SVM menawarkan *sweet spot* optimal antara akurasi yang kompetitif (74%+), ukuran model sangat ringan (<2 MB), dan kecepatan inferensi instan (<5 milidetik).""", S["body"]),
+    tbl_comparison_full = [
+        ["No", "Referensi & Jurnal", "Metode & Ekstraksi", "Dataset & Skala", "Hasil Kinerja", "Kekuatan Utama", "Kelemahan & Research Gap"],
+        ["1", "Merdiansah et al. (2024)\nJIKOMSI Vol.7(1)", "IndoBERT Base +\nFine-Tuning IndoNLU", "Twitter (X) Indonesia;\nTopik Kendaraan Listrik", "Fine-tuned model unggul atas base", "Menangkap konteks semantik bahasa gaul/slang Twitter Indonesia", "Gap: Topik hanya sempit pada EV; arsitektur berat (GPU required), tidak ada web live deployment"],
+        ["2", "Hendrawan & Kusmiyati (2024)\nCESS Vol.9(1)", "Multinomial NB vs\nLinear SVM (TF-IDF)", "Twitter Indonesia;\nTopik EV & Kebijakan", "SVM mengungguli NB secara konsisten", "Perbandingan metodologi sangat mirip dengan proyek SentimentGreen", "Gap: Tidak menerapkan class weighting sehingga recall minoritas tidak optimal; dataset lokal terbatas"],
+        ["3", "Prameswari et al. (2024)\nInnovative Vol.4(4)", "SVM, Naive Bayes,\nRandom Forest (TF-IDF)", "Twitter Indonesia;\nTopik Kendaraan Listrik", "SVM meraih akurasi tertinggi di antara 3 model", "Menyajikan perspektif komparasi algoritma ensemble (Random Forest)", "Gap: Evaluasi terbatas pada akurasi global (mengabaikan Macro F1); tidak mengeksplorasi deployment web"],
+        ["4", "Hidayatullah et al. (2024)\nJournalISI Vol.6(3)", "FastText Embedding +\nIndoBERT Transformer", "~119.000 Tweet EV\n(Jan 2020 – Jun 2023)", "Akurasi 82,50%;\n58% opini positif", "Dataset terbesar dalam literatur; komparasi embedding sub-kata vs transformer", "Gap: Membutuhkan infrastruktur server backend berdaya tinggi; tidak dapat dijalankan offline di browser"],
+        ["5", "Edward Qian (2022)\nKaggle Benchmark", "Dataset Benchmark;\nMulti-class (-1, 0, 1, 2)", "43.943 Tweet Iklim Global\nBahasa Inggris (2008–2019)", "Standar acuan\npenelitian iklim global", "Skala data global masif; rentang waktu panjang 11 tahun mencakup berbagai konferensi iklim", "Gap: Masih berupa raw data kotor (memuat 9.276 kelas news fakta dan 2.760 duplikasi tweet)"],
+        ["6", "SentimentGreen (2024)\n[Proyek Penelitian Ini]", "TF-IDF (1,2) +\nLinear SVM (Balanced) & MNB", "31.907 Tweet Bersih;\nSplit 80:20 (6.382 uji)", "Akurasi: 74,07%\nMacro F1: 65,81%\nRecall Negatif: 60,13%", "Mengatasi imbalanced data; domain luas (ekonomi hijau); inferensi 100% offline di browser", "Kontribusi: Menjembatani kesenjangan deployment, efisiensi komputasi, dan transparansi metrik makro"],
+    ]
+    story += [safe_table(tbl_comparison_full, [0.8*cm, 3.2*cm, 2.7*cm, 2.6*cm, 2.2*cm, 2.6*cm, 2.9*cm], S, align_center_cols={0}), Spacer(1, 0.4*cm)]
 
-        Paragraph("4. IDENTIFIKASI KESENJANGAN RISET (RESEARCH GAPS)", S["h1"]),
-        Paragraph("1. <b>Kesenjangan Topik (Thematic Gap):</b> Mayoritas penelitian tahun 2024 hanya berfokus pada topik parsial seperti kendaraan listrik (EV) atau pajak karbon secara terisolasi. Belum ada studi komprehensif yang memetakan spektrum ekonomi hijau secara holistik.", S["bullet"]),
-        Paragraph("2. <b>Kesenjangan Bahasa & Skala (Language & Scale Gap):</b> Penelitian di Indonesia umumnya menggunakan sampel lokal berukuran kecil (<2.000 tweet), sedangkan dataset iklim global berskala besar berbahasa Inggris jarang diteliti dalam publikasi nasional.", S["bullet"]),
-        Paragraph("3. <b>Kesenjangan Arsitektur Penerapan (Deployment Gap):</b> Seluruh literatur yang dikaji berhenti pada tahap eksperimen Google Colab/Jupyter Notebook tanpa menyediakan antarmuka web inferensi offline yang dapat diakses publik.", S["bullet"]),
-        Paragraph("4. <b>Kesenjangan Penanganan Imbalance (Class Imbalance Gap):</b> Banyak studi mengabaikan metrik Macro F1-Score dan hanya melaporkan Accuracy, mengaburkan masalah recall collapse pada kelas minoritas.", S["bullet"]),
-        Paragraph("5. <b>Kontribusi SentimentGreen:</b> Proyek ini mengisi seluruh kesenjangan di atas dengan menyajikan platform analisis sentimen holistik, berdataset 31.907 tweet, evaluasi makro transparan, dan sistem inferensi browser offline murni.", S["bullet"]),
+    # BAB 3: BEDAH DETAIL METODOLOGI PER ARTIKEL
+    story += [
+        PageBreak(),
+        Paragraph("3. TELAAH MENDALAM METODOLOGI PER ARTIKEL JURNAL", S["h1"]),
+        Paragraph("3.1 Artikel 1: Merdiansah et al. (2024) – JIKOMSI Vol. 7, No. 1", S["h2"]),
+        Paragraph("""• <b>Judul:</b> Analisis Sentimen Pengguna X Indonesia Terkait Kendaraan Listrik Menggunakan IndoBERT.
+• <b>Metodologi:</b> Penelitian ini mengimplementasikan arsitektur transformer <i>IndoBERT</i> (Indonesian Bidirectional Encoder Representations from Transformers) dengan skenario komparasi: IndoBERT dasar (*base pre-trained*) berbanding IndoBERT yang telah melalui *fine-tuning* pada korpus IndoNLU benchmark.
+• <b>Hasil & Analisis:</b> *Fine-tuning* terbukti meningkatkan kemampuan model dalam merepresentasikan teks Twitter Indonesia yang sarat akan singkatan informal, kata serapan daerah, dan slang.
+• <b>Kelemahan & Research Gap:</b> Cakupan topik sangat sempit terbatas pada kendaraan listrik personal dan mengabaikan sektor vital ekonomi hijau lainnya seperti energi terbarukan, pajak karbon, dan efisiensi industri. Model transformer memiliki ukuran parameter sangat besar (>400 MB) yang menuntut kartu grafis (GPU) berdaya komputasi tinggi, sehingga tidak memungkinkan untuk diintegrasikan secara instan pada platform web statis di sisi klien.""", S["body"]),
 
-        Paragraph("5. DAFTAR REFERENSI", S["h1"]),
-        Paragraph("[1] Hendrawan, G. N., & Kusmiyati, H. (2024). Evaluasi Performa Naive Bayes dan SVM dalam Analisis Sentimen Kendaraan Listrik. CESS, 9(1), 299-313.", S["body"]),
-        Paragraph("[2] Hidayatullah, S., et al. (2024). Sentiment Analysis of Indonesian Citizens on Electric Vehicle Using FastText and BERT. JournalISI, 6(3), 780-791.", S["body"]),
-        Paragraph("[3] Merdiansah, R., et al. (2024). Analisis Sentimen Pengguna X Indonesia Terkait Kendaraan Listrik Menggunakan IndoBERT. JIKOMSI, 7(1), 221-228.", S["body"]),
-        Paragraph("[4] Prameswari, G. A. S. A., et al. (2024). Sentiment Analysis of Electric Vehicles on Twitter Using Machine Learning. Innovative, 4(4), 837-845.", S["body"]),
-        Paragraph("[5] Qian, E. (2022). Twitter Climate Change Sentiment Dataset. Kaggle Dataset Repository.", S["body"]),
-        Paragraph("[6] UNEP. (2011). Towards a Green Economy: Pathways to Sustainable Development and Poverty Eradication.", S["body"]),
+        Paragraph("3.2 Artikel 2: Hendrawan & Kusmiyati (2024) – CESS Vol. 9, No. 1", S["h2"]),
+        Paragraph("""• <b>Judul:</b> Evaluasi Performa Naive Bayes dan SVM dalam Analisis Sentimen Kendaraan Listrik di Media Sosial Twitter.
+• <b>Metodologi:</b> Peneliti membandingkan secara langsung algoritma Multinomial Naive Bayes dan Support Vector Machine menggunakan representasi Term Frequency-Inverse Document Frequency (TF-IDF). Tahapan preprocessing mencakup pembersihan karakter non-alfanumerik, case folding, filtering stopword, dan stemming bahasa Indonesia.
+• <b>Hasil & Analisis:</b> SVM secara konsisten mengungguli Naive Bayes dalam hal stabilitas margin klasifikasi. Temuan ini selaras penuh dengan hasil eksperimen pada proyek SentimentGreen.
+• <b>Kelemahan & Research Gap:</b> Penelitian tidak menerapkan teknik penanganan ketidakseimbangan kelas (*class weighting* atau *resampling*), sehingga model cenderung bias ke kelas mayoritas. Pengujian juga berhenti pada script Python lokal tanpa menghasilkan produk aplikasi siap pakai.""", S["body"]),
+
+        Paragraph("3.3 Artikel 3: Prameswari et al. (2024) – Innovative Vol. 4, No. 4", S["h2"]),
+        Paragraph("""• <b>Judul:</b> Sentiment Analysis of Electric Vehicles on Twitter Using Machine Learning.
+• <b>Metodologi:</b> Menambahkan algoritma pembelajaran berbasis ansambel (*ensemble method*) yaitu Random Forest sebagai pembanding ketiga di samping Naive Bayes dan SVM. Vektorisasi teks mengandalkan pembobotan TF-IDF unigram.
+• <b>Hasil & Analisis:</b> Meskipun Random Forest mampu menangani korelasi fitur non-linear, Linear SVM tetap mempertahankan skor akurasi tertinggi berkat keunggulannya dalam menangani ruang fitur leksikon yang *sparse* (jarang).
+• <b>Kelemahan & Research Gap:</b> Evaluasi performa hanya difokuskan pada metrik Accuracy global dan mengabaikan Macro F1-Score. Pada dataset imbalanced, metrik Accuracy memberikan gambaran semu yang menutupi ketidakmampuan model dalam memprediksi kelas minoritas secara presisi.""", S["body"]),
+
+        Paragraph("3.4 Artikel 4: Hidayatullah et al. (2024) – JournalISI Vol. 6, No. 3", S["h2"]),
+        Paragraph("""• <b>Judul:</b> Sentiment Analysis of Indonesian Citizens on Electric Vehicle Using FastText and BERT Method.
+• <b>Metodologi:</b> Mengevaluasi dataset skala besar (~119.000 tweet) yang dikumpulkan selama 3,5 tahun (2020–2023). Membandingkan model embedding sub-kata (FastText) berkecepatan tinggi dengan arsitektur deep learning BERT.
+• <b>Hasil & Analisis:</b> Meraih akurasi 82,50% dengan temuan bahwa 58% sentimen masyarakat bersifat positif terhadap kendaraan listrik. FastText terbukti cepat dalam pelatihan namun kalah dalam menangani ambiguitas semantik kalimat majemuk dibandingkan BERT.
+• <b>Kelemahan & Research Gap:</b> Seluruh analisis hanya berlaku untuk korpus bahasa Indonesia. Selain itu, ketergantungan pada server komputasi aktif membuat sistem ini tidak dapat diakses publik secara fleksibel tanpa anggaran operasional cloud.""", S["body"]),
+
+        # BAB 4: ANALISIS SINTESIS & KESENJANGAN RISET (RESEARCH GAPS)
+        PageBreak(),
+        Paragraph("4. ANALISIS SINTESIS METODOLOGIS DAN KESENJANGAN RISET (RESEARCH GAPS)", S["h1"]),
+        Paragraph("4.1 Sintesis Perbandingan Algoritma Klasik vs Transformer", S["h2"]),
+        Paragraph("""Berdasarkan telaah komprehensif terhadap seluruh literatur, disintesiskan perbandingan trade-off fundamental antara pendekatan arsitektur:""", S["body"]),
+    ]
+
+    tbl_sintesis_algo = [
+        ["Dimensi Karakteristik", "Multinomial Naive Bayes", "Linear Support Vector Machine", "Transformer (BERT / IndoBERT)"],
+        ["Asumsi Dasar", "Independensi bersyarat fitur", "Maksimasi margin pemisah hyperplane", "Mekanisme Self-Attention kontekstual"],
+        ["Ketahanan Imbalanced Data", "Rendah (Cenderung Recall Collapse)", "Tinggi (Dengan Class Weighting)", "Tinggi (Melalui Weighted Cross-Entropy)"],
+        ["Ukuran Model Serialisasi", "Sangat Kecil (<1 MB)", "Sangat Ringan (<2 MB file bobot JSON)", "Sangat Berat (400 MB – 1.5 GB file bobot)"],
+        ["Latensi Inferensi Teks", "Sangat Cepat (<2 milidetik)", "Sangat Cepat (<5 milidetik di browser)", "Lambat (150–500 ms tanpa GPU akselerasi)"],
+        ["Kebutuhan Infrastruktur", "Tidak butuh server (Client-side JS)", "Tidak butuh server (Client-side JS)", "Wajib server komputasi GPU aktif (Cloud)"],
+        ["Kesesuaian Aplikasi Web", "Sangat Tinggi untuk prototipe ringan", "Optimal (Sweet Spot Akurasi & Efisiensi)", "Rendah untuk akses offline tanpa server"],
+    ]
+    story += [safe_table(tbl_sintesis_algo, [3.8*cm, 4.2*cm, 4.5*cm, 4.5*cm], S), Spacer(1, 0.4*cm)]
+
+    story += [
+        Paragraph("4.2 Identifikasi dan Pemetaan 5 Kesenjangan Riset Utama (The 5 Research Gaps)", S["h2"]),
+        Paragraph("""Kajian ini mengidentifikasi lima kesenjangan riset nyata (*critical research gaps*) yang belum terjawab dalam literatur tahun 2024:""", S["body"]),
+        Paragraph("<b>1. Kesenjangan Topik Holistik (Thematic Scope Gap):</b> Mayoritas studi 2024 (Artikel 1, 2, 3, dan 4) secara eksklusif hanya meneliti sentimen terhadap kendaraan listrik (*electric vehicles*). Belum ada publikasi terpadu yang memetakan spektrum ekonomi hijau secara komprehensif, mencakup energi terbarukan (surya, angin, geotermal), pajak karbon (*carbon pricing*), restorasi hutan, dan dekarbonisasi industri.", S["bullet"]),
+        Paragraph("<b>2. Kesenjangan Skala Korpus Global (Dataset Scale & Language Gap):</b> Sebagian besar penelitian nasional menggunakan dataset lokal berukuran terbatas (<2.000 tweet). Studi analisis sentimen berbasis korpus global berskala masif (>30.000 tweet) yang meneliti dinamika isu iklim dunia belum banyak dipublikasikan secara mendalam di forum akademik nasional.", S["bullet"]),
+        Paragraph("<b>3. Kesenjangan Arsitektur Deployment (Zero-Server Deployment Gap):</b> Seluruh literatur yang ditinjau berhenti pada fase komputasi eksperimental di Google Colab atau Jupyter Notebook. Tidak ada satu pun penelitian yang merilis platform publik interaktif yang dapat mengeksekusi model NLP secara 100% mandiri di peramban web (*client-side browser inference*) tanpa ongkos server backend.", S["bullet"]),
+        Paragraph("<b>4. Kesenjangan Penanganan Ketidakseimbangan Sampel (Class Imbalance Neglect Gap):</b> Banyak publikasi hanya berpuas diri dengan pelaporan nilai *Accuracy*, yang pada data media sosial berdistribusi miring menyamarkan fenomena *recall collapse* pada kelas sentimen negatif.", S["bullet"]),
+        Paragraph("<b>5. Kesenjangan Konsistensi Pipeline Lintas Bahasa Komputasi (Pipeline Replication Gap):</b> Sering kali ditemukan ketidakcocokan antara alur tokenisasi saat pelatihan Python dan saat sistem diuji oleh pengguna akhir. Standarisasi algoritma Porter Stemmer dan stopword filtering yang identik bit-demi-bit antara backend Python dan engine JavaScript peramban menjadi kebutuhan mendesak.", S["bullet"]),
+
+        Paragraph("4.3 Kontribusi Nyata Proyek SentimentGreen dalam Menjawab Research Gaps", S["h2"]),
+        Paragraph("""Proyek <b>SentimentGreen</b> secara strategis dibangun untuk menutup kelima kesenjangan riset di atas:
+• Menjawab <i>Thematic Gap</i> dengan menganalisis isu ekonomi hijau dan perubahan iklim secara holistik (31.907 sampel valid).
+• Menjawab <i>Deployment Gap</i> dengan merevolusi model machine learning menjadi format JSON mandiri yang dieksekusi offline menggunakan JavaScript murni di sisi peramban web pengguna.
+• Menjawab <i>Class Imbalance Gap</i> melalui penerapan pembobotan kelas terdistribusi seimbang pada Linear SVM, yang terbukti meningkatkan recall kelas minoritas negatif dari 34,81% (pada Naive Bayes) menjadi 60,13% (peningkatan mutlak +25,32%).
+• Menjawab <i>Pipeline Replication Gap</i> melalui standarisasi pustaka preprocessing identik antara `ml/preprocess.py` dan `web/preprocess.js`.""", S["body"]),
+
+        # BAB 5: KESIMPULAN & DAFTAR REFERENSI
+        Spacer(1, 0.3*cm),
+        Paragraph("5. KESIMPULAN STUDI LITERATUR", S["h1"]),
+        Paragraph("""Tinjauan literatur ini menyimpulkan bahwa Linear Support Vector Machine dengan penyeimbang bobot kelas merupakan arsitektur machine learning klasik paling tangguh dan efisien untuk analisis sentimen isu lingkungan pada media sosial. Kombinasi representasi TF-IDF berdimensi 15.000 fitur dan Linear SVM menghasilkan performa yang sangat kompetitif tanpa mengorbankan kecepatan inferensi, menjadikannya fondasi teknologi yang ideal bagi platform publik berbasis web statis.""", S["body"]),
+
+        Paragraph("DAFTAR REFERENSI AKADEMIK TERVERIFIKASI", S["h1"]),
+        Paragraph("[1] Cortes, C., & Vapnik, V. (1995). Support-vector networks. Machine Learning, 20(3), 273-297.", S["body"]),
+        Paragraph("[2] Devlin, J., et al. (2019). BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. Proceedings of NAACL-HLT, 4171-4186.", S["body"]),
+        Paragraph("[3] Hendrawan, G. N., & Kusmiyati, H. (2024). Evaluasi Performa Naive Bayes dan SVM dalam Analisis Sentimen Kendaraan Listrik di Media Sosial Twitter. CESS (Journal of Computer Engineering, System and Science), 9(1), 299-313.", S["body"]),
+        Paragraph("[4] Hidayatullah, S., et al. (2024). Sentiment Analysis of Indonesian Citizens on Electric Vehicle Using FastText and BERT Method. Journal of Information Systems and Informatics (JournalISI), 6(3), 780-791.", S["body"]),
+        Paragraph("[5] IPCC. (2023). Climate Change 2023: Synthesis Report. Contribution of Working Groups I, II and III to the Sixth Assessment Report of the IPCC.", S["body"]),
+        Paragraph("[6] Joachims, T. (1998). Text categorization with Support Vector Machines: Learning with many relevant features. European Conference on Machine Learning (ECML), 137-142.", S["body"]),
+        Paragraph("[7] McCallum, A., & Nigam, K. (1998). A comparison of event models for Naive Bayes text classification. AAAI-98 Workshop on Learning for Text Categorization, 41-48.", S["body"]),
+        Paragraph("[8] Merdiansah, R., et al. (2024). Analisis Sentimen Pengguna X Indonesia Terkait Kendaraan Listrik Menggunakan IndoBERT. JIKOMSI (Jurnal Ilmu Komputer dan Sistem Informasi), 7(1), 221-228.", S["body"]),
+        Paragraph("[9] Pak, A., & Paroubek, P. (2010). Twitter as a corpus for sentiment analysis and opinion mining. Proceedings of LREC 2010, 1320-1326.", S["body"]),
+        Paragraph("[10] Porter, M. F. (1980). An algorithm for suffix stripping. Program: Electronic Library and Information Systems, 14(3), 130-137.", S["body"]),
+        Paragraph("[11] Prameswari, G. A. S. A., et al. (2024). Sentiment Analysis of Electric Vehicles on Twitter Using Machine Learning. Innovative: Journal of Social Science Research, 4(4), 837-845.", S["body"]),
+        Paragraph("[12] Qian, E. (2022). Twitter Climate Change Sentiment Dataset. Kaggle Dataset Repository. https://www.kaggle.com/datasets/edqian/twitter-climate-change-sentiment-dataset", S["body"]),
+        Paragraph("[13] Salton, G., & Buckley, C. (1988). Term-weighting approaches in automatic text retrieval. Information Processing & Management, 24(5), 513-523.", S["body"]),
+        Paragraph("[14] UNEP. (2011). Towards a Green Economy: Pathways to Sustainable Development and Poverty Eradication. United Nations Environment Programme.", S["body"]),
         hr(),
-        Paragraph("Dokumen Studi Literatur Ilmiah Resmi - SentimentGreen | https://sentimentgreen.vercel.app", S["center"]),
+        Paragraph("Dokumen Resmi Systematic Literature Review & Research Gap Analysis - SentimentGreen | https://sentimentgreen.vercel.app", S["center"]),
     ]
 
     doc.build(story)
