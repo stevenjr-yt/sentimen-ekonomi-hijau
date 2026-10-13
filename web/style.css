@@ -417,6 +417,7 @@ canvas { max-width: 100%; }
   opacity: 0;
   transition: opacity 0.3s;
   border-radius: var(--radius);
+  pointer-events: none;
 }
 .dl-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
 .dl-card:hover::before { opacity: 1; }
@@ -460,6 +461,8 @@ canvas { max-width: 100%; }
   padding: 11px 20px; border-radius: 10px; border: none; cursor: pointer;
   text-decoration: none; transition: all 0.25s;
   box-shadow: 0 4px 16px rgba(52,211,153,0.3);
+  position: relative;
+  z-index: 10;
 }
 .btn-dl:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(52,211,153,0.45); }
 .btn-dl-blue {
