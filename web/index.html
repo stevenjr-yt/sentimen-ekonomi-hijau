@@ -823,6 +823,39 @@ export_data = {
           </div>
         </div>
 
+        <!-- Data Mentah (Dataset Kaggle) -->
+        <div class="dl-card">
+          <div class="dl-icon-wrap dl-amber">
+            <span class="dl-icon">🗃️</span>
+          </div>
+          <div class="dl-body">
+            <div class="dl-badge dl-badge-amber">Dataset Mentah</div>
+            <h3 class="dl-title">Twitter Climate Raw Data</h3>
+            <p class="dl-desc">Dataset mentah asli Edward Qian (Kaggle) 43.943 tweet teranotasi (2008–2019) dengan kolom <code>sentiment</code>, <code>message</code>, dan <code>tweetid</code>. Siap dipakai untuk penelitian &amp; replikasi.</p>
+            <div class="dl-meta">
+              <span class="dl-tag">📊 43.943 Tweet</span>
+              <span class="dl-tag">📁 CSV 6.3 MB</span>
+              <span class="dl-tag">🗜️ GZ 2.5 MB</span>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; width: 100%;">
+            <a href="https://raw.githubusercontent.com/stevenjr-yt/sentimen-ekonomi-hijau/main/data/twitter_sentiment_data.csv" target="_blank" class="btn-view-online" id="viewDataset">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+              🔍 Pratinjau CSV Online ↗
+            </a>
+            <div style="display: flex; gap: 8px;">
+              <a href="downloads/twitter_sentiment_data_raw.csv" download="twitter_climate_sentiment_raw.csv" class="btn-dl" style="flex: 1; padding: 9px 12px; font-size: 0.82rem; background: linear-gradient(135deg, #d97706, #fbbf24); color: #000;" id="dlDatasetCsv">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Unduh CSV
+              </a>
+              <a href="downloads/twitter_sentiment_data_raw.csv.gz" download="twitter_climate_sentiment_raw.csv.gz" class="btn-dl-secondary" style="flex: 1; background: rgba(245,158,11,0.15); border-color: rgba(245,158,11,0.4); color: #fcd34d;" id="dlDatasetGz">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Unduh GZ (2.5MB)
+              </a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
