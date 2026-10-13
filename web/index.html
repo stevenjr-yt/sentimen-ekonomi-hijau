@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SentimentGreen – Analisis Sentimen Ekonomi Hijau</title>
+  <meta name="description" content="Platform analisis sentimen berbasis AI untuk mendeteksi opini publik terhadap isu ekonomi hijau dan perubahan iklim dari data Twitter." />
+  <meta property="og:title" content="SentimentGreen – Analisis Sentimen Ekonomi Hijau" />
+  <meta property="og:description" content="Deteksi sentimen tweet tentang perubahan iklim secara real-time dengan model offline SVM & Naive Bayes." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ─── NAV ──────────────────────────────────────────────────── -->
+  <nav class="nav" id="navbar">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-brand">
+        <span class="brand-icon">🌿</span>
+        <span>SentimentGreen</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#analyze">Analisis</a></li>
+        <li><a href="#dashboard">Dashboard</a></li>
+        <li><a href="#methodology">Metodologi</a></li>
+        <li><a href="#about">Tentang</a></li>
+      </ul>
+      <button class="btn-nav-cta" onclick="document.getElementById('analyze').scrollIntoView({behavior:'smooth'})">
+        Coba Sekarang
+      </button>
+    </div>
+  </nav>
+
+  <!-- ─── HERO ─────────────────────────────────────────────────── -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <div class="hero-orb orb-1"></div>
+      <div class="hero-orb orb-2"></div>
+      <div class="hero-orb orb-3"></div>
+      <div class="hero-grid"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="pulse-dot"></span>
+        Model AI Offline · 100% Browser · No Server
+      </div>
+      <h1 class="hero-title">
+        Analisis Sentimen<br />
+        <span class="gradient-text">Ekonomi Hijau</span>
+      </h1>
+      <p class="hero-sub">
+        Platform berbasis AI untuk menganalisis opini publik terhadap isu
+        <strong>perubahan iklim</strong>, <strong>energi terbarukan</strong>, dan
+        <strong>kebijakan lingkungan</strong> dari data Twitter/X secara real-time —
+        menggunakan model SVM &amp; Naive Bayes yang berjalan sepenuhnya offline di browser Anda.
+      </p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="document.getElementById('analyze').scrollIntoView({behavior:'smooth'})">
+          <span>Mulai Analisis</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <button class="btn-secondary" onclick="document.getElementById('dashboard').scrollIntoView({behavior:'smooth'})">
+          Lihat Dashboard
+        </button>
+      </div>
+      <div class="hero-stats" id="heroStats">
+        <div class="stat"><span class="stat-num" id="statTotal">–</span><span class="stat-label">Total Tweet</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num" id="statAcc">–</span><span class="stat-label">Akurasi SVM</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num" id="statF1">–</span><span class="stat-label">F1-Score</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num" id="statVocab">–</span><span class="stat-label">Kosakata</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── ANALYZE ──────────────────────────────────────────────── -->
+  <section class="section" id="analyze">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">🔍 Real-time Analysis</div>
+        <h2 class="section-title">Analisis Tweet Sekarang</h2>
+        <p class="section-sub">Masukkan tweet tentang isu iklim atau ekonomi hijau untuk mendeteksi sentimennya.</p>
+      </div>
+
+      <!-- model selector -->
+      <div class="model-selector">
+        <button class="model-btn active" id="btnSVM" onclick="selectModel('svm')">
+          <span class="model-icon">⚡</span> SVM (Akurasi lebih tinggi)
+        </button>
+        <button class="model-btn" id="btnNB" onclick="selectModel('nb')">
+          <span class="model-icon">🎲</span> Naive Bayes (Lebih cepat)
+        </button>
+      </div>
+
+      <div class="analyze-grid">
+        <!-- Single tweet -->
+        <div class="card analyze-card">
+          <h3 class="card-title">Analisis Tweet Tunggal</h3>
+          <div class="textarea-wrap">
+            <textarea id="tweetInput" class="tweet-input" placeholder="Contoh: Solar energy is the future of green economy! #RenewableEnergy #ClimateAction" rows="4"></textarea>
+            <div class="char-count" id="charCount">0 / 280</div>
+          </div>
+          <div class="example-chips">
+            <span class="chip-label">Contoh:</span>
+            <button class="chip" onclick="setExample('Solar energy is the future of clean and sustainable green economy! #RenewableEnergy')">Positif</button>
+            <button class="chip" onclick="setExample('Climate policies are destroying jobs and hurting ordinary families financially')">Negatif</button>
+            <button class="chip" onclick="setExample('Government announces new renewable energy targets for 2030 climate commitments')">Netral</button>
+          </div>
+          <button class="btn-primary btn-full" id="btnAnalyze" onclick="runSingle()">
+            <span id="btnAnalyzeLabel">Analisis Sentimen</span>
+            <div class="btn-spinner hidden" id="btnSpinner"></div>
+          </button>
+
+          <!-- result -->
+          <div class="result-box hidden" id="resultBox">
+            <div class="result-label-row">
+              <div class="sentiment-badge" id="resultBadge"></div>
+              <div class="result-conf" id="resultConf"></div>
+            </div>
+            <div class="prob-bars" id="probBars"></div>
+            <div class="token-section">
+              <div class="token-title">Token setelah preprocessing:</div>
+              <div class="tokens" id="tokenList"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Batch -->
+        <div class="card analyze-card">
+          <h3 class="card-title">Analisis Batch (Upload CSV)</h3>
+          <p class="card-desc">Upload file CSV dengan kolom <code>message</code> untuk menganalisis banyak tweet sekaligus.</p>
+          <div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()" ondrop="handleDrop(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')">
+            <div class="drop-icon">📂</div>
+            <div class="drop-text">Drop CSV di sini atau klik untuk pilih file</div>
+            <div class="drop-sub">Format: CSV dengan kolom <code>message</code></div>
+          </div>
+          <input type="file" id="fileInput" accept=".csv" class="hidden" onchange="handleFile(event)" />
+          <div class="batch-progress hidden" id="batchProgress">
+            <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
+            <div class="progress-text" id="progressText">Memproses...</div>
+          </div>
+          <div id="batchResult" class="batch-result hidden"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── DASHBOARD ────────────────────────────────────────────── -->
+  <section class="section section-dark" id="dashboard">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">📊 Model Performance</div>
+        <h2 class="section-title">Dashboard Evaluasi Model</h2>
+        <p class="section-sub">Hasil evaluasi model pada data uji (20% dari dataset) — Twitter Climate Change Sentiment Dataset (43.943 tweet).</p>
+      </div>
+
+      <div class="metrics-grid" id="metricsGrid">
+        <!-- dinamis dari metrics.json -->
+        <div class="metric-card loading-shimmer"></div>
+        <div class="metric-card loading-shimmer"></div>
+        <div class="metric-card loading-shimmer"></div>
+        <div class="metric-card loading-shimmer"></div>
+      </div>
+
+      <!-- charts row -->
+      <div class="charts-row">
+        <div class="chart-card">
+          <h3 class="chart-title">Distribusi Sentimen Dataset</h3>
+          <canvas id="pieChart" width="320" height="320"></canvas>
+        </div>
+        <div class="chart-card chart-card-wide">
+          <h3 class="chart-title">Perbandingan Metrik: SVM vs Naive Bayes</h3>
+          <canvas id="barChart" width="560" height="300"></canvas>
+        </div>
+      </div>
+
+      <!-- confusion matrix per-class -->
+      <div class="per-class-section">
+        <h3 class="chart-title">Metrik Per Kelas – Model Terbaik</h3>
+        <div class="per-class-grid" id="perClassGrid">
+          <div class="loading-shimmer" style="height:120px;border-radius:12px"></div>
+          <div class="loading-shimmer" style="height:120px;border-radius:12px"></div>
+          <div class="loading-shimmer" style="height:120px;border-radius:12px"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── METHODOLOGY ──────────────────────────────────────────── -->
+  <section class="section" id="methodology">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">🔬 Metodologi</div>
+        <h2 class="section-title">Pipeline Pemrosesan</h2>
+        <p class="section-sub">Alur kerja sistem dari data mentah hingga hasil prediksi sentimen.</p>
+      </div>
+      <div class="pipeline">
+        <div class="pipe-step">
+          <div class="pipe-num">01</div>
+          <div class="pipe-icon">🐦</div>
+          <h4>Data Collection</h4>
+          <p>Twitter Climate Change Sentiment Dataset — 43.943 tweet berlabel pro/anti/neutral dari Kaggle.</p>
+        </div>
+        <div class="pipe-arrow">→</div>
+        <div class="pipe-step">
+          <div class="pipe-num">02</div>
+          <div class="pipe-icon">🧹</div>
+          <h4>Text Cleaning</h4>
+          <p>Hapus URL, @mention, #hashtag, angka, tanda baca, HTML entities, dan RT marker.</p>
+        </div>
+        <div class="pipe-arrow">→</div>
+        <div class="pipe-step">
+          <div class="pipe-num">03</div>
+          <div class="pipe-icon">🔡</div>
+          <h4>Case Folding + Stemming</h4>
+          <p>Lowercase → hapus stopword → Porter Stemmer mengubah kata ke bentuk dasarnya.</p>
+        </div>
+        <div class="pipe-arrow">→</div>
+        <div class="pipe-step">
+          <div class="pipe-num">04</div>
+          <div class="pipe-icon">🔢</div>
+          <h4>TF-IDF Vectorization</h4>
+          <p>Unigram + Bigram, max 15.000 fitur, sublinear TF, L2 normalization.</p>
+        </div>
+        <div class="pipe-arrow">→</div>
+        <div class="pipe-step">
+          <div class="pipe-num">05</div>
+          <div class="pipe-icon">🤖</div>
+          <h4>Training & Evaluasi</h4>
+          <p>Split 80/20 stratified. Train SVM (LinearSVC) &amp; Multinomial NB. Evaluasi Accuracy, Precision, Recall, F1.</p>
+        </div>
+      </div>
+
+      <!-- Formula cards -->
+      <div class="formula-grid">
+        <div class="formula-card">
+          <h4>TF-IDF</h4>
+          <div class="formula">TF(t,d) = f(t,d) / Σ f(t',d)<br />IDF(t) = log(N / df(t)) + 1<br />TF-IDF(t,d) = TF(t,d) × IDF(t)</div>
+          <p>Bobot kata berbanding lurus frekuensi lokal dan berbanding terbalik frekuensi global.</p>
+        </div>
+        <div class="formula-card">
+          <h4>Multinomial Naive Bayes</h4>
+          <div class="formula">P(c|d) ∝ P(c) × Π P(wᵢ|c)<br />P(wᵢ|c) = (N(wᵢ,c)+α) / (N(c)+α|V|)<br />(Laplace smoothing α=0.3)</div>
+          <p>Menghitung probabilitas posterior tiap kelas menggunakan Teorema Bayes dengan asumsi independensi fitur.</p>
+        </div>
+        <div class="formula-card">
+          <h4>Linear SVM</h4>
+          <div class="formula">arg min‖w‖² + C Σ ξᵢ<br />s.t. yᵢ(wᵀxᵢ+b) ≥ 1 − ξᵢ<br />Decision: sign(wᵀx + b)</div>
+          <p>Mencari hyperplane pemisah dengan margin maksimum antar kelas sentimen.</p>
+        </div>
+        <div class="formula-card">
+          <h4>Metrik Evaluasi</h4>
+          <div class="formula">Accuracy = (TP+TN) / N<br />Precision = TP / (TP+FP)<br />Recall = TP / (TP+FN)<br />F1 = 2×P×R / (P+R)</div>
+          <p>Evaluasi komprehensif dengan macro-average untuk menangani ketidakseimbangan kelas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── ABOUT ─────────────────────────────────────────────────── -->
+  <section class="section section-dark" id="about">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">ℹ️ Tentang</div>
+        <h2 class="section-title">Tentang Proyek Ini</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="about-icon">🌍</div>
+          <h4>Latar Belakang</h4>
+          <p>Ekonomi hijau merupakan agenda global yang semakin mendesak. Platform ini menganalisis persepsi publik di media sosial untuk memahami dukungan atau penolakan masyarakat terhadap kebijakan iklim.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-icon">🔒</div>
+          <h4>Privasi 100%</h4>
+          <p>Semua pemrosesan terjadi sepenuhnya di browser Anda. Tidak ada data yang dikirim ke server. Model AI berjalan offline menggunakan JavaScript murni.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-icon">📦</div>
+          <h4>Open Source</h4>
+          <p>Kode sumber tersedia di GitHub. Model diekspor ke format JSON untuk inferensi offline. Dataset: Twitter Climate Change Sentiment (Kaggle, Edward Qian).</p>
+        </div>
+        <div class="about-card">
+          <div class="about-icon">📚</div>
+          <h4>Referensi Ilmiah</h4>
+          <p>Berdasarkan penelitian terkini dalam NLP, analisis sentimen, dan ekonomi hijau. Lengkap dengan laporan teknis dan paper jurnal ilmiah.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ────────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <span class="brand-icon">🌿</span>
+          <span class="brand-name">SentimentGreen</span>
+          <p>Analisis sentimen opini publik terhadap isu ekonomi hijau berbasis AI.</p>
+        </div>
+        <div class="footer-links">
+          <div>
+            <h5>Navigasi</h5>
+            <a href="#analyze">Analisis</a>
+            <a href="#dashboard">Dashboard</a>
+            <a href="#methodology">Metodologi</a>
+          </div>
+          <div>
+            <h5>Sumber</h5>
+            <a href="https://www.kaggle.com/datasets/edqian/twitter-climate-change-sentiment-dataset" target="_blank">Dataset Kaggle</a>
+            <a href="https://github.com" target="_blank">GitHub</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2024 SentimentGreen. Dataset: Twitter Climate Change Sentiment (Edward Qian, Kaggle).</span>
+        <span>Model offline · TF-IDF · SVM · Naive Bayes</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="preprocess.js"></script>
+  <script>window.PreprocessLib = { cleanText, filterStem };</script>
+  <script src="inference.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

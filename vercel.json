@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "sentimentgreen",
+  "public": true,
+  "buildCommand": "",
+  "outputDirectory": "web",
+  "routes": [
+    { "src": "/(.*)", "dest": "/$1" }
+  ]
+}
