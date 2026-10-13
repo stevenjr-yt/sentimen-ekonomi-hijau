@@ -549,7 +549,7 @@ def build_literatur():
         ["Pangkalan Data Akademik", "Google Scholar, Semantic Scholar, ResearchGate, Garuda (Kemdikbudristek), IEEE Xplore"],
         ["Rentang Periode Publikasi", "Fokus Utama: Publikasi 2024 (dengan landasan teori algoritma klasik 1980–2022)"],
         ["Kueri Penelusuran Boolean", "('analisis sentimen' OR 'sentiment analysis') AND ('green economy' OR 'climate change' OR 'kendaraan listrik' OR 'electric vehicles') AND ('Naive Bayes' OR 'SVM' OR 'BERT' OR 'IndoBERT')"],
-        ["Kriteria Inklusi (Diterima)", "1. Artikel jurnal peer-reviewed terbit tahun 2024; 2. Topik domain energi bersih, iklim, kendaraan listrik, atau kebijakan hijau; 3. Menerapkan pengujian empiris NLP terukur (Akurasi, Precision, Recall, F1-Score)."],
+        ["Kriteria Inklusi (Diterima)", "1. Artikel jurnal peer-reviewed terbit tahun 2024–2026; 2. Topik domain energi bersih, iklim, kendaraan listrik, atau kebijakan hijau; 3. Menerapkan pengujian empiris NLP terukur (Akurasi, Precision, Recall, F1-Score)."],
         ["Kriteria Eksklusi (Ditolak)", "1. Makalah opini kualitatif tanpa eksperimen data; 2. Pendekatan rule-based/leksikon murni tanpa ML; 3. Data tidak berasal dari media sosial atau tidak berkaitan dengan isu lingkungan."],
     ]
     story += [safe_table(tbl_lit_method, [4.5*cm, 12.5*cm], S), Spacer(1, 0.4*cm)]
@@ -568,7 +568,7 @@ def build_literatur():
         ["3", "Prameswari et al. (2024)\nInnovative Vol.4(4)", "SVM, Naive Bayes,\nRandom Forest (TF-IDF)", "Twitter Indonesia;\nTopik Kendaraan Listrik", "SVM meraih akurasi tertinggi di antara 3 model", "Menyajikan perspektif komparasi algoritma ensemble (Random Forest)", "Gap: Evaluasi terbatas pada akurasi global (mengabaikan Macro F1); tidak mengeksplorasi deployment web"],
         ["4", "Hidayatullah et al. (2024)\nJournalISI Vol.6(3)", "FastText Embedding +\nIndoBERT Transformer", "~119.000 Tweet EV\n(Jan 2020 – Jun 2023)", "Akurasi 82,50%;\n58% opini positif", "Dataset terbesar dalam literatur; komparasi embedding sub-kata vs transformer", "Gap: Membutuhkan infrastruktur server backend berdaya tinggi; tidak dapat dijalankan offline di browser"],
         ["5", "Edward Qian (2022)\nKaggle Benchmark", "Dataset Benchmark;\nMulti-class (-1, 0, 1, 2)", "43.943 Tweet Iklim Global\nBahasa Inggris (2008–2019)", "Standar acuan\npenelitian iklim global", "Skala data global masif; rentang waktu panjang 11 tahun mencakup berbagai konferensi iklim", "Gap: Masih berupa raw data kotor (memuat 9.276 kelas news fakta dan 2.760 duplikasi tweet)"],
-        ["6", "SentimentGreen (2024)\n[Proyek Penelitian Ini]", "TF-IDF (1,2) +\nLinear SVM (Balanced) & MNB", "31.907 Tweet Bersih;\nSplit 80:20 (6.382 uji)", "Akurasi: 74,07%\nMacro F1: 65,81%\nRecall Negatif: 60,13%", "Mengatasi imbalanced data; domain luas (ekonomi hijau); inferensi 100% offline di browser", "Kontribusi: Menjembatani kesenjangan deployment, efisiensi komputasi, dan transparansi metrik makro"],
+        ["6", "SentimentGreen (2026)\n[Proyek Penelitian Ini]", "TF-IDF (1,2) +\nLinear SVM (Balanced) & MNB", "31.907 Tweet Bersih;\nSplit 80:20 (6.382 uji)", "Akurasi: 74,07%\nMacro F1: 65,81%\nRecall Negatif: 60,13%", "Mengatasi imbalanced data; domain luas (ekonomi hijau); inferensi 100% offline di browser", "Kontribusi: Menjembatani kesenjangan deployment, efisiensi komputasi, dan transparansi metrik makro"],
     ]
     story += [safe_table(tbl_comparison_full, [0.8*cm, 3.2*cm, 2.7*cm, 2.6*cm, 2.2*cm, 2.6*cm, 2.9*cm], S, align_center_cols={0}), Spacer(1, 0.4*cm)]
 
