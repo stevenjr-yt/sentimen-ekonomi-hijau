@@ -348,19 +348,42 @@ canvas { max-width: 100%; }
 
 /* ── FORMULAS ── */
 .formula-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-@media(max-width:700px){ .formula-grid{grid-template-columns:1fr;} }
+@media(max-width:900px){ .formula-grid{grid-template-columns:1fr;} }
 .formula-card {
   background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius-sm); padding: 24px;
+  border-radius: var(--radius); padding: 24px; transition: all 0.3s;
+  display: flex; flex-direction: column; gap: 14px;
 }
-.formula-card h4 { font-size: 0.95rem; font-weight: 700; color: var(--green); margin-bottom: 12px; }
+.formula-card:hover { border-color: var(--green); box-shadow: var(--shadow); }
+.formula-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.formula-title { font-size: 1.1rem; font-weight: 700; color: #fff; margin: 0; }
+.formula-badge {
+  font-size: 0.72rem; padding: 3px 10px; border-radius: 100px;
+  background: rgba(52,211,153,0.15); border: 1px solid rgba(52,211,153,0.3);
+  color: var(--green); font-weight: 700; text-transform: uppercase;
+}
 .formula {
-  background: rgba(0,0,0,0.3); border-left: 3px solid var(--green);
-  padding: 12px 16px; margin-bottom: 12px; border-radius: 0 8px 8px 0;
-  font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; line-height: 1.7;
-  white-space: pre-wrap;
+  background: rgba(0,0,0,0.45); border-left: 4px solid var(--green);
+  padding: 14px 16px; border-radius: 0 10px 10px 0;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.7;
+  color: #a7f3d0; overflow-x: auto;
 }
-.formula-card p { font-size: 0.82rem; color: var(--text2); }
+.analogi-box {
+  background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 10px; padding: 14px; display: flex; gap: 12px; align-items: flex-start;
+}
+.analogi-icon { font-size: 1.6rem; line-height: 1; flex-shrink: 0; }
+.analogi-content h5 { margin: 0 0 4px 0; font-size: 0.84rem; color: #fbbf24; font-weight: 700; }
+.analogi-content p { margin: 0; font-size: 0.82rem; color: #e2e8f0; line-height: 1.55; }
+.detail-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.detail-item {
+  font-size: 0.82rem; color: var(--text2); line-height: 1.5;
+  padding-left: 18px; position: relative;
+}
+.detail-item::before {
+  content: '▸'; position: absolute; left: 0; color: var(--green); font-weight: bold;
+}
+.detail-item strong { color: #fff; }
 
 /* ── ABOUT ── */
 .about-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }

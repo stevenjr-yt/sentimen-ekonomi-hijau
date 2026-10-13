@@ -235,28 +235,114 @@
         </div>
       </div>
 
-      <!-- Formula cards -->
+      <!-- Formula cards (Penjelasan Detail & Analogi Anak 5 Tahun) -->
       <div class="formula-grid">
+
+        <!-- 1. TF-IDF -->
         <div class="formula-card">
-          <h4>TF-IDF</h4>
-          <div class="formula">TF(t,d) = f(t,d) / Σ f(t',d)<br />IDF(t) = log(N / df(t)) + 1<br />TF-IDF(t,d) = TF(t,d) × IDF(t)</div>
-          <p>Bobot kata berbanding lurus frekuensi lokal dan berbanding terbalik frekuensi global.</p>
+          <div class="formula-header">
+            <h4 class="formula-title">1. TF-IDF (Pemberi Nilai Penting Kata)</h4>
+            <span class="formula-badge">Representasi Fitur</span>
+          </div>
+          <div class="formula">
+TF(t,d)     = f(t,d) / Σ f(t',d)
+IDF(t)      = ln((1 + N) / (1 + df(t))) + 1
+TF-IDF(t,d) = TF(t,d) × IDF(t)
+Normalisasi = v / sqrt(Σ vᵢ²)
+          </div>
+          <div class="analogi-box">
+            <div class="analogi-icon">🧸</div>
+            <div class="analogi-content">
+              <h5>Analogi Buat Anak 5 Tahun:</h5>
+              <p>Bayangin kamu punya sekotak mainan. Kata seperti <em>"dan"</em> atau <em>"yang"</em> itu kayak pasir—ada di mana-mana jadi gak ada harganya. Tapi kata <em>"solar"</em> atau <em>"rusak"</em> itu kayak robot dinosaurus emas yang langka! Rumus ini tugasnya ngasih nilai tinggi ke kata yang langka dan penting, sambil mencoret kata pasaran.</p>
+            </div>
+          </div>
+          <ul class="detail-list">
+            <li class="detail-item"><strong>TF (Term Frequency):</strong> Menghitung berapa kali kata itu muncul di tweet ini. Makin sering diomongin, makin kuat topiknya.</li>
+            <li class="detail-item"><strong>IDF (Inverse Document Frequency):</strong> Menghukum kata pasaran yang ada di semua tweet, dan memberi bonus poin buat kata langka yang bermakna.</li>
+            <li class="detail-item"><strong>Normalisasi L2:</strong> Menyamaratakan tweet panjang dan tweet pendek biar adil saat dinilai.</li>
+          </ul>
         </div>
+
+        <!-- 2. Multinomial Naive Bayes -->
         <div class="formula-card">
-          <h4>Multinomial Naive Bayes</h4>
-          <div class="formula">P(c|d) ∝ P(c) × Π P(wᵢ|c)<br />P(wᵢ|c) = (N(wᵢ,c)+α) / (N(c)+α|V|)<br />(Laplace smoothing α=0.3)</div>
-          <p>Menghitung probabilitas posterior tiap kelas menggunakan Teorema Bayes dengan asumsi independensi fitur.</p>
+          <div class="formula-header">
+            <h4 class="formula-title">2. Multinomial Naive Bayes (Tebak Peluang Kata)</h4>
+            <span class="formula-badge">Probabilistik</span>
+          </div>
+          <div class="formula">
+P(c|d)   ∝ P(c) × Π P(wᵢ|c)
+P(wᵢ|c)  = (N(wᵢ,c) + α) / (N(c) + α|V|)
+Keputusan = arg max [ log P(c) + Σ log P(wᵢ|c) ]
+(Laplace Smoothing α = 0.3)
+          </div>
+          <div class="analogi-box">
+            <div class="analogi-icon">🎲</div>
+            <div class="analogi-content">
+              <h5>Analogi Buat Anak 5 Tahun:</h5>
+              <p>Kayak kamu nebak isi kantong permen teman. Kalau kamu dengar kata <em>"senang"</em>, <em>"matahari"</em>, dan <em>"bersih"</em>, kantong mana yang paling mungkin? Pasti kantong permen <strong>Positif</strong>! Naive Bayes ngitung peluangnya dengan mengalikan probabilitas tiap kata satu per satu.</p>
+            </div>
+          </div>
+          <ul class="detail-list">
+            <li class="detail-item"><strong>Teorema Bayes:</strong> Mengubah fakta kata-kata yang muncul menjadi probabilitas sentimen (Positif, Netral, atau Negatif).</li>
+            <li class="detail-item"><strong>Laplace Smoothing (α = 0.3):</strong> Penyelamat jika ketemu kata baru yang belum pernah diajarkan, supaya nilainya tidak jadi nol mutlak.</li>
+            <li class="detail-item"><strong>Log-Domain:</strong> Perkalian diubah jadi penjumlahan logaritma biar komputer gak pusing ngitung angka desimal yang kelewat kecil.</li>
+          </ul>
         </div>
+
+        <!-- 3. Linear SVM -->
         <div class="formula-card">
-          <h4>Linear SVM</h4>
-          <div class="formula">arg min‖w‖² + C Σ ξᵢ<br />s.t. yᵢ(wᵀxᵢ+b) ≥ 1 − ξᵢ<br />Decision: sign(wᵀx + b)</div>
-          <p>Mencari hyperplane pemisah dengan margin maksimum antar kelas sentimen.</p>
+          <div class="formula-header">
+            <h4 class="formula-title">3. Linear SVM (Garis Pembatas Paling Tegas)</h4>
+            <span class="formula-badge">Model Juara (74,07%)</span>
+          </div>
+          <div class="formula">
+min (1/2)||w||² + C × Σ (W_{yᵢ} × ξᵢ)
+s.t.  yᵢ(wᵀxᵢ + b) ≥ 1 - ξᵢ
+Keputusan = arg max [ w_cᵀx + b_c ]
+(Parameter: C = 0.5, class_weight='balanced')
+          </div>
+          <div class="analogi-box">
+            <div class="analogi-icon">⚔️</div>
+            <div class="analogi-content">
+              <h5>Analogi Buat Anak 5 Tahun:</h5>
+              <p>Bayangin kamu lagi main benteng di pasir antara tim Hijau (senang) dan tim Merah (marah). SVM itu kayak kapten pintar yang ngegambar garis parit selebar-lebarnya di tengah, biar kedua tim gak tabrakan dan jarak amannya paling maksimal!</p>
+            </div>
+          </div>
+          <ul class="detail-list">
+            <li class="detail-item"><strong>Hyperplane & Margin:</strong> Garis pemisah yang mencari jarak aman terjauh (margin maksimal) antar kelompok opini.</li>
+            <li class="detail-item"><strong>Regularisasi C = 0.5:</strong> Menjaga keseimbangan antara garis yang rapi dan toleransi jika ada 1-2 kata nyeleneh.</li>
+            <li class="detail-item"><strong>Class Weight 'Balanced':</strong> Memberi perhatian ekstra pada kelas minoritas (negatif) agar tidak kalah suara dari kelas positif.</li>
+          </ul>
         </div>
+
+        <!-- 4. Metrik Evaluasi -->
         <div class="formula-card">
-          <h4>Metrik Evaluasi</h4>
-          <div class="formula">Accuracy = (TP+TN) / N<br />Precision = TP / (TP+FP)<br />Recall = TP / (TP+FN)<br />F1 = 2×P×R / (P+R)</div>
-          <p>Evaluasi komprehensif dengan macro-average untuk menangani ketidakseimbangan kelas.</p>
+          <div class="formula-header">
+            <h4 class="formula-title">4. Metrik Rapor Ujian (Cara Menguji Kepintaran AI)</h4>
+            <span class="formula-badge">Evaluasi Model</span>
+          </div>
+          <div class="formula">
+Accuracy  = (TP + TN) / (Total Sampel)
+Precision = TP / (TP + FP)  [Ketepatan Tebakan]
+Recall    = TP / (TP + FN)  [Daya Ingat Menangkap Kasus]
+F1-Score  = 2 × (P × R) / (P + R)  [Keseimbangan Harmonis]
+Macro-Avg = (Nilai_Neg + Nilai_Net + Nilai_Pos) / 3
+          </div>
+          <div class="analogi-box">
+            <div class="analogi-icon">🎯</div>
+            <div class="analogi-content">
+              <h5>Analogi Buat Anak 5 Tahun:</h5>
+              <p>Kalau kamu main petak umpet: <strong>Precision</strong> itu artinya kalau kamu bilang <em>"Aku ketemu Budi!"</em>, emang beneran Budi bukan pohon. <strong>Recall</strong> itu artinya dari 10 anak yang ngumpet, berapa anak yang berhasil kamu temukan. <strong>F1-Score</strong> itu nilai rapor gabungan keduanya!</p>
+            </div>
+          </div>
+          <ul class="detail-list">
+            <li class="detail-item"><strong>Accuracy (74,07%):</strong> Persentase total tebakan yang benar dari 6.382 tweet ujian.</li>
+            <li class="detail-item"><strong>Recall:</strong> Kemampuan model mendeteksi tweet negatif tanpa terlewat satupun.</li>
+            <li class="detail-item"><strong>Macro F1 (65,81%):</strong> Menilai ketiga kelas secara adil tanpa menganaktirikan tweet negatif yang jumlahnya lebih sedikit.</li>
+          </ul>
         </div>
+
       </div>
     </div>
   </section>
