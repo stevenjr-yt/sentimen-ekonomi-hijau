@@ -507,3 +507,70 @@ code {
   background: rgba(255,255,255,0.07); padding: 1px 6px;
   border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.85em;
 }
+
+/* ── CODE & MODEL ARCHITECTURE SECTION ── */
+.code-box-container {
+  background: #090e17;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-top: 16px;
+}
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0d1524;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.code-tabs {
+  display: flex;
+  gap: 8px;
+}
+.code-tab-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text3);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+.code-tab-btn:hover {
+  color: var(--text);
+  background: rgba(255,255,255,0.05);
+}
+.code-tab-btn.active {
+  color: var(--green);
+  background: rgba(52,211,153,0.12);
+  border-color: rgba(52,211,153,0.3);
+}
+.code-lang-tag {
+  font-size: 0.72rem;
+  color: var(--text3);
+  font-family: 'JetBrains Mono', monospace;
+  background: rgba(255,255,255,0.05);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+.code-content {
+  padding: 16px;
+  margin: 0;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: #e2e8f0;
+  background: #090e17;
+}
+.code-content .c-kw   { color: #c084fc; font-weight: 600; } /* keyword */
+.code-content .c-fn   { color: #60a5fa; } /* function */
+.code-content .c-str  { color: #34d399; } /* string */
+.code-content .c-num  { color: #f59e0b; } /* number */
+.code-content .c-com  { color: #64748b; font-style: italic; } /* comment */
+.code-content .c-prop { color: #38bdf8; } /* property */
+

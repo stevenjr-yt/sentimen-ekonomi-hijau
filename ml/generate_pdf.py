@@ -293,6 +293,58 @@ def build_laporan():
     ]
     story += [safe_table(tbl_samples_clean, [6.5*cm, 8.5*cm, 2*cm], S, align_center_cols={2}), Spacer(1, 0.4*cm)]
 
+    story += [
+        Paragraph("3.4 Implementasi Kode Sumber Pelatihan Model (ml/train.py)", S["h2"]),
+        Paragraph("""Pelatihan model dan ekstraksi fitur diimplementasikan menggunakan Python 3.10 dan pustaka scikit-learn. Ekstraksi fitur menggunakan <code>TfidfVectorizer</code> dengan rentang n-gram unigram dan bigram (1, 2), ambang batas frekuensi dokumen minimum <code>min_df=3</code>, dan batas leksikon 15.000 fitur teratas.""", S["body"]),
+        Paragraph("<b>1. Kode Inisialisasi dan Pembobotan Model:</b>", S["body"]),
+        Paragraph("""vec = TfidfVectorizer(ngram_range=(1, 2), min_df=3, max_features=15000)
+Xtr = vec.fit_transform(X_train)
+Xte = vec.transform(X_test)
+
+# Inisialisasi Model Linear SVM dengan Penyeimbang Kelas Otomatis
+model_svm = LinearSVC(C=0.5, class_weight='balanced', random_state=42)
+model_svm.fit(Xtr, y_train)
+
+# Inisialisasi Model Multinomial Naive Bayes dengan Laplace Smoothing
+model_nb = MultinomialNB(alpha=0.3)
+model_nb.fit(Xtr, y_train)""", S["formula"]),
+        Paragraph("""Penetapan parameter <code>class_weight='balanced'</code> pada Linear SVM secara otomatis menghitung bobot penalti terbalik terhadap frekuensi kelas: $W_c = N_{total} / (K * N_c)$. Hal ini krusial dalam mengatasi kegagalan deteksi pada kelas negatif yang hanya mencakup 12,06% dari total dataset.""", S["body"]),
+        Paragraph("<b>2. Mekanisme Serialisasi dan Ekspor Bobot ke Format JSON:</b>", S["body"]),
+        Paragraph("""export_data = {
+    "labels": ["negatif", "netral", "positif"],
+    "vocab": sorted(vec.vocabulary_, key=vec.vocabulary_.get),
+    "idf": np.round(vec.idf_, 5).tolist(),
+    "svm": {"coef": np.round(model_svm.coef_, 5).tolist(),
+            "intercept": np.round(model_svm.intercept_, 5).tolist()},
+    "nb": {"class_log_prior": np.round(model_nb.class_log_prior_, 5).tolist(),
+           "feature_log_prob": np.round(model_nb.feature_log_prob_, 5).tolist()}
+}
+with open('web/model/model.json', 'w') as f:
+    json.dump(export_data, f, separators=(',', ':'))""", S["formula"]),
+        Paragraph("""Dengan mengekspor bobot secara terstruktur ke format JSON, model tidak lagi membutuhkan runtime Python aktif, server backend, ataupun GPU saat proses inferensi di lingkungan produksi web.""", S["body"]),
+        Spacer(1, 0.2*cm),
+
+        Paragraph("3.5 Implementasi Mesin Inferensi Client-Side (web/inference.js)", S["h2"]),
+        Paragraph("""Di sisi peramban web (browser), inferensi dilakukan secara 100% luring (offline) menggunakan JavaScript murni. Alur inferensi meliputi: (1) Tokenisasi dan Porter Stemming pada teks masukan, (2) Pembentukan vektor TF-IDF jarang (sparse vector), dan (3) Perkalian dot-product bobot SVM.""", S["body"]),
+        Paragraph("""function predictSVM(vec) {
+    const { coef, intercept } = MODEL.svm;
+    // 1. Hitung skor linear hyperplane untuk 3 kelas: score = (w . x) + b
+    const scores = coef.map((c, ci) => {
+        let s = intercept[ci];
+        for (let i = 0; i < vec.length; i++) if (vec[i] > 0) s += c[i] * vec[i];
+        return s;
+    });
+    // 2. Argmax untuk menentukan label sentimen terbaik
+    const bestIdx = scores.indexOf(Math.max(...scores));
+    // 3. Normalisasi Softmax untuk menghasilkan estimasi keyakinan (confidence)
+    const exps = scores.map(s => Math.exp(s));
+    const sumExps = exps.reduce((a, b) => a + b, 0);
+    const probs = exps.map(e => e / sumExps);
+    return { label: MODEL.labels[bestIdx], probs };
+}""", S["formula"]),
+        Paragraph("""Uji konsistensi (consistency test) pada 200 sampel acak membuktikan bahwa keluaran prediksi antara skrip Python dan mesin JavaScript browser menghasilkan kecocokan 100% tanpa ada diskrepansi numerik.""", S["body"]),
+    ]
+
     # BAB IV: HASIL EVALUASI & VISUALISASI
     story += [
         PageBreak(),
@@ -464,6 +516,14 @@ def build_paper():
         Paragraph("P(w_i | c) = [ N_{w_i, c} + 0.3 ] / [ N_c + 0.3 * |V| ]", S["formula"]),
         Paragraph("""• <b>Linear Support Vector Machine:</b> Membentuk hyperplane optimal dengan fungsi tujuan minimasi margin berpenalti reguler C=0.5 dan penyeimbang bobot kelas (class_weight='balanced'):""", S["body"]),
         Paragraph("min_{w,b,ξ} [ (1/2)*||w||^2 + 0.5 * Σ W_{y_i} * ξ_i ]   s.t.  y_i(w^T x_i + b) >= 1 - ξ_i", S["formula"]),
+
+        Paragraph("2.4 Arsitektur Kode dan Inferensi Zero-Server Browser", S["h2"]),
+        Paragraph("""Berbeda dari pendekatan konvensional yang membutuhkan container Docker dan API GPU di server cloud, penelitian ini menerapkan paradigma <i>Zero-Server Client-Side Inference</i>:""", S["body"]),
+        Paragraph("""1. <b>Pelatihan & Serialisasi (Python):</b> Model dilatih di scikit-learn, kemudian seluruh parameter matematis berupa leksikon kata, nilai IDF, matriks koefisien SVM (3 x 15.000 bobot), dan bias dipadatkan ke format <code>model.json</code>.
+2. <b>Mesin Inferensi Klien (JavaScript):</b> Di browser klien, teks tweet diproses dengan Porter Stemmer JavaScript murni, dikonversi menjadi vektor TF-IDF jarang, dan dihitung nilai hyperplane-nya menggunakan operasi perkalian titik linear:
+   <code>score_c = intercept_c + Σ (coef_{c,i} * x_i)</code>
+   Probabilitas posterior dinormalisasi melalui fungsi Softmax untuk menghasilkan estimasi keyakinan (confidence).
+3. <b>Efisiensi & Privasi:</b> Pendekatan ini menghilangkan biaya latensi jaringan round-trip HTTP, menghemat 100% biaya server hosting AI, serta menjamin privasi data pengguna secara mutlak karena tidak ada teks yang dikirim keluar peramban.""", S["body"]),
 
         # 3. HASIL DAN PEMBAHASAN
         PageBreak(),

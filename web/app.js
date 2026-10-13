@@ -375,3 +375,19 @@ function showModelFallback() {
 // ── Helpers ───────────────────────────────────────────────────────
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const escHtml = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+
+// ── Code Tab Switcher ─────────────────────────────────────────────
+function switchCodeTab(tabId, btn) {
+  document.querySelectorAll(".code-tab-panel").forEach(p => p.classList.add("hidden"));
+  document.querySelectorAll(".code-tab-btn").forEach(b => b.classList.remove("active"));
+  const target = document.getElementById(tabId);
+  if (target) target.classList.remove("hidden");
+  if (btn) btn.classList.add("active");
+
+  const tag = document.getElementById("codeLangTag");
+  if (tag) {
+    if (tabId === "tab-train") tag.textContent = "Python 3.10 / scikit-learn";
+    else if (tabId === "tab-stem") tag.textContent = "JavaScript (ES6) / Regex Engine";
+    else if (tabId === "tab-infer") tag.textContent = "JavaScript (ES6) / Math Vector";
+  }
+}

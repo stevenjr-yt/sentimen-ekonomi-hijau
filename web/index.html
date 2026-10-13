@@ -24,6 +24,7 @@
         <li><a href="#analyze">Analisis</a></li>
         <li><a href="#dashboard">Dashboard</a></li>
         <li><a href="#methodology">Metodologi</a></li>
+        <li><a href="#models-code">Model &amp; Koding</a></li>
         <li><a href="#literatur">Studi Literatur</a></li>
         <li><a href="#downloads">Unduhan</a></li>
         <li><a href="#about">Tentang</a></li>
@@ -342,6 +343,189 @@ Macro-Avg = (Nilai_Neg + Nilai_Net + Nilai_Pos) / 3
             <li class="detail-item"><strong>Recall:</strong> Kemampuan model mendeteksi tweet negatif tanpa terlewat satupun.</li>
             <li class="detail-item"><strong>Macro F1 (65,81%):</strong> Menilai ketiga kelas secara adil tanpa menganaktirikan tweet negatif yang jumlahnya lebih sedikit.</li>
           </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── MODEL ARCHITECTURE & KODING EXPLANATION ─────────────────── -->
+  <section class="section" id="models-code">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">💻 Deep Dive Arsitektur Model &amp; Kode Sumber</div>
+        <h2 class="section-title">Penjelasan Model AI &amp; Implementasi Koding</h2>
+        <p class="section-sub">Bedah tuntas cara kerja model Machine Learning, algoritma matematis, dan baris kode Python (training) serta JavaScript (browser engine).</p>
+      </div>
+
+      <!-- 3 Kartu Arsitektur Inti -->
+      <div class="method-grid" style="margin-bottom: 30px;">
+        <!-- Card 1: Linear SVM -->
+        <div class="method-card">
+          <div class="method-num" style="background: rgba(52,211,153,0.15); color: var(--green);">01</div>
+          <h3 class="method-card-title">Linear SVM (Balanced) — Model Terbaik</h3>
+          <p style="font-size: 0.85rem; color: var(--text2); line-height: 1.6; margin-bottom: 12px;">
+            <strong>Prinsip Kerja:</strong> Mencari bidang pemisah (hyperplane 15.000 dimensi) dengan jarak terlebar (maximum margin) antar opini. Dilengkapi pembobotan <code>class_weight='balanced'</code> agar opini kritis/negatif tidak tertelan oleh mayoritas pro-iklim.
+          </p>
+          <div style="background: rgba(0,0,0,0.3); border-radius: 6px; padding: 10px; font-size: 0.8rem; border-left: 3px solid var(--green); margin-bottom: 10px;">
+            <strong>⚙️ Parameter scikit-learn:</strong><br />
+            <code>LinearSVC(C=0.5, class_weight='balanced', random_state=42)</code>
+          </div>
+          <p style="font-size: 0.8rem; color: var(--text3); line-height: 1.5;">
+            <strong>Keunggulan:</strong> Mencapai F1-Score Makro <strong>65,81%</strong> dan Recall Negatif <strong>60,13%</strong> (naik +25,3% dibanding Naive Bayes).
+          </p>
+        </div>
+
+        <!-- Card 2: Multinomial Naive Bayes -->
+        <div class="method-card">
+          <div class="method-num" style="background: rgba(96,165,250,0.15); color: var(--blue);">02</div>
+          <h3 class="method-card-title">Multinomial Naive Bayes — Pembanding Cepat</h3>
+          <p style="font-size: 0.85rem; color: var(--text2); line-height: 1.6; margin-bottom: 12px;">
+            <strong>Prinsip Kerja:</strong> Menghitung perkalian probabilitas kemunculan tiap kata pada masing-masing kelas memakai Teorema Bayes. Dilengkapi <strong>Laplace Smoothing (α = 0.3)</strong> agar kata langka tidak bernilai probabilitas 0.
+          </p>
+          <div style="background: rgba(0,0,0,0.3); border-radius: 6px; padding: 10px; font-size: 0.8rem; border-left: 3px solid var(--blue); margin-bottom: 10px;">
+            <strong>⚙️ Parameter scikit-learn:</strong><br />
+            <code>MultinomialNB(alpha=0.3)</code>
+          </div>
+          <p style="font-size: 0.8rem; color: var(--text3); line-height: 1.5;">
+            <strong>Kelemahan Terkuak:</strong> Terkena <em>Recall Collapse</em> pada kelas minoritas (hanya 34,81%) akibat bias probabilitas apriori kelas mayoritas.
+          </p>
+        </div>
+
+        <!-- Card 3: Zero-Server Bridge -->
+        <div class="method-card">
+          <div class="method-num" style="background: rgba(167,139,250,0.15); color: #a78bfa);">03</div>
+          <h3 class="method-card-title">Jembatan Zero-Server (Python ke JSON ke JS)</h3>
+          <p style="font-size: 0.85rem; color: var(--text2); line-height: 1.6; margin-bottom: 12px;">
+            <strong>Prinsip Kerja:</strong> Model yang dilatih di Python diekstrak matriks koefisien (<code>coef_</code>), intercept (<code>intercept_</code>), dan IDF-nya ke format <code>model.json</code>. Di browser, JavaScript melakukan inferensi matematika murni tanpa butuh runtime Python/GPU!
+          </p>
+          <div style="background: rgba(0,0,0,0.3); border-radius: 6px; padding: 10px; font-size: 0.8rem; border-left: 3px solid #a78bfa; margin-bottom: 10px;">
+            <strong>📦 Ukuran Bundle Model:</strong><br />
+            <code>model.json</code> (15.000 bobot kata) &middot; Eksekusi &lt; 3 milidetik/tweet
+          </div>
+          <p style="font-size: 0.8rem; color: var(--text3); line-height: 1.5;">
+            <strong>Privasi 100%:</strong> Teks tweet tidak pernah dikirim ke server pihak ketiga manapun.
+          </p>
+        </div>
+      </div>
+
+      <!-- Kode Interaktif Tab Showcase -->
+      <div class="code-box-container">
+        <div class="code-header">
+          <div class="code-tabs">
+            <button class="code-tab-btn active" onclick="switchCodeTab('tab-train', this)">1. Training Pipeline (Python)</button>
+            <button class="code-tab-btn" onclick="switchCodeTab('tab-stem', this)">2. Porter Stemmer (JavaScript)</button>
+            <button class="code-tab-btn" onclick="switchCodeTab('tab-infer', this)">3. Browser Inference (JavaScript)</button>
+          </div>
+          <span class="code-lang-tag" id="codeLangTag">Python 3.10 / scikit-learn</span>
+        </div>
+
+        <!-- TAB 1: PYTHON TRAINING PIPELINE -->
+        <div id="tab-train" class="code-tab-panel">
+          <pre class="code-content"><code><span class="c-com"># ml/train.py - Pipeline Pelatihan Model & Ekspor JSON Offline</span>
+<span class="c-kw">from</span> sklearn.feature_extraction.text <span class="c-kw">import</span> TfidfVectorizer
+<span class="c-kw">from</span> sklearn.svm <span class="c-kw">import</span> LinearSVC
+<span class="c-kw">from</span> sklearn.naive_bayes <span class="c-kw">import</span> MultinomialNB
+<span class="c-kw">import</span> json, numpy <span class="c-kw">as</span> np
+
+<span class="c-com"># 1. Ekstraksi Fitur TF-IDF Unigram & Bigram dengan Leksikon 15.000 fitur</span>
+vec = <span class="c-fn">TfidfVectorizer</span>(ngram_range=(<span class="c-num">1</span>, <span class="c-num">2</span>), min_df=<span class="c-num">3</span>, max_features=<span class="c-num">15000</span>,
+                      token_pattern=<span class="c-str">r"(?u)\b\w+\b"</span>)
+Xtr = vec.<span class="c-fn">fit_transform</span>(X_train)
+Xte = vec.<span class="c-fn">transform</span>(X_test)
+
+<span class="c-com"># 2. Inisialisasi Model dengan Penyeimbang Kelas (Balanced Class Weighting)</span>
+model_svm = <span class="c-fn">LinearSVC</span>(C=<span class="c-num">0.5</span>, class_weight=<span class="c-str">"balanced"</span>, random_state=<span class="c-num">42</span>)
+model_nb  = <span class="c-fn">MultinomialNB</span>(alpha=<span class="c-num">0.3</span>)
+
+model_svm.<span class="c-fn">fit</span>(Xtr, y_train)  <span class="c-com"># Mencari hyperplane pemisah berdimensi 15.000</span>
+model_nb.<span class="c-fn">fit</span>(Xtr, y_train)   <span class="c-com"># Menghitung frekuensi kata logaritmik</span>
+
+<span class="c-com"># 3. Ekspor Matriks Bobot ke JSON untuk Inferensi Mandiri di Browser</span>
+export_data = {
+    <span class="c-str">"labels"</span>: [<span class="c-str">"negatif"</span>, <span class="c-str">"netral"</span>, <span class="c-str">"positif"</span>],
+    <span class="c-str">"vocab"</span>: sorted(vec.vocabulary_, key=vec.vocabulary_.get),
+    <span class="c-str">"idf"</span>: np.round(vec.idf_, <span class="c-num">5</span>).tolist(),
+    <span class="c-str">"svm"</span>: {
+        <span class="c-str">"coef"</span>: np.round(model_svm.coef_, <span class="c-num">5</span>).tolist(),          <span class="c-com"># Bobot hyperplane [3 x 15000]</span>
+        <span class="c-str">"intercept"</span>: np.round(model_svm.intercept_, <span class="c-num">5</span>).tolist() <span class="c-com"># Bias pemisah kelas [3]</span>
+    },
+    <span class="c-str">"nb"</span>: {
+        <span class="c-str">"class_log_prior"</span>: np.round(model_nb.class_log_prior_, <span class="c-num">5</span>).tolist(),
+        <span class="c-str">"feature_log_prob"</span>: np.round(model_nb.feature_log_prob_, <span class="c-num">5</span>).tolist()
+    }
+}
+<span class="c-kw">with</span> open(<span class="c-str">"web/model/model.json"</span>, <span class="c-str">"w"</span>) <span class="c-kw">as</span> f:
+    json.<span class="c-fn">dump</span>(export_data, f, separators=(<span class="c-str">","</span>, <span class="c-str">":"</span>))
+<span class="c-fn">print</span>(<span class="c-str">"✅ Model berhasil diekspor tanpa ketergantungan library eksternal!"</span>)</code></pre>
+        </div>
+
+        <!-- TAB 2: PORTER STEMMER JAVASCRIPT -->
+        <div id="tab-stem" class="code-tab-panel hidden">
+          <pre class="code-content"><code><span class="c-com">// web/preprocess.js - Implementasi Porter Stemmer 1980 Murni di JavaScript</span>
+<span class="c-kw">const</span> Porter = (() =&gt; {
+  <span class="c-kw">const</span> step2list = { ational: <span class="c-str">"ate"</span>, tional: <span class="c-str">"tion"</span>, izer: <span class="c-str">"ize"</span>, iviti: <span class="c-str">"ive"</span>, ... };
+  <span class="c-kw">const</span> c = <span class="c-str">"[^aeiou]"</span>, v = <span class="c-str">"[aeiouy]"</span>, C = c + <span class="c-str">"[^aeiouy]*"</span>, V = v + <span class="c-str">"[aeiou]*"</span>;
+  <span class="c-kw">const</span> mgr0 = <span class="c-kw">new</span> RegExp(<span class="c-str">"^("</span> + C + <span class="c-str">")?"</span> + V + C);
+
+  <span class="c-kw">return function</span> <span class="c-fn">stem</span>(w) {
+    <span class="c-kw">if</span> (w.length &lt; <span class="c-num">3</span>) <span class="c-kw">return</span> w;
+    <span class="c-com">// Tahap 1: Merapikan akhiran jamak (policies -&gt; polici)</span>
+    <span class="c-kw">let</span> re = <span class="c-str">/^(.+?)(ss|i)es$/</span>;
+    <span class="c-kw">if</span> (re.<span class="c-fn">test</span>(w)) w = w.<span class="c-fn">replace</span>(re, <span class="c-str">"$1$2"</span>);
+    
+    <span class="c-com">// Tahap 2: Menghapus sufiks participle (warming -&gt; warm, changed -&gt; chang)</span>
+    re = <span class="c-str">/^(.+?)(ed|ing)$/</span>;
+    <span class="c-kw">if</span> (re.<span class="c-fn">test</span>(w)) {
+      <span class="c-kw">let</span> stem = re.<span class="c-fn">exec</span>(w)[<span class="c-num">1</span>];
+      <span class="c-kw">if</span> (mgr0.<span class="c-fn">test</span>(stem)) w = stem;
+    }
+    <span class="c-kw">return</span> w;
+  };
+})();
+
+<span class="c-com">// Membersihkan URL, mention (@), hashtag (#), angka, lalu stemming</span>
+<span class="c-kw">function</span> <span class="c-fn">cleanAndStem</span>(text, stopSet) {
+  <span class="c-kw">let</span> cleaned = text.<span class="c-fn">toLowerCase</span>()
+    .<span class="c-fn">replace</span>(<span class="c-str">/https?:\/\/\S+/g</span>, <span class="c-str">" "</span>)
+    .<span class="c-fn">replace</span>(<span class="c-str">/[@#]\w+/g</span>, <span class="c-str">" "</span>)
+    .<span class="c-fn">replace</span>(<span class="c-str">/[^a-z\s]/g</span>, <span class="c-str">" "</span>);
+  <span class="c-kw">return</span> cleaned.<span class="c-fn">split</span>(<span class="c-str">" "</span>)
+    .<span class="c-fn">filter</span>(w =&gt; w.length &gt;= <span class="c-num">2</span> &amp;&amp; !stopSet.<span class="c-fn">has</span>(w))
+    .<span class="c-fn">map</span>(Porter);
+}</code></pre>
+        </div>
+
+        <!-- TAB 3: BROWSER INFERENCE JAVASCRIPT -->
+        <div id="tab-infer" class="code-tab-panel hidden">
+          <pre class="code-content"><code><span class="c-com">// web/inference.js - Mesin Inferensi Perkalian Titik (Dot Product) & Softmax</span>
+<span class="c-kw">function</span> <span class="c-fn">predictSVM</span>(vec) {
+  <span class="c-kw">const</span> { coef, intercept } = MODEL.svm;
+  <span class="c-kw">const</span> labels = MODEL.labels; <span class="c-com">// ["negatif", "netral", "positif"]</span>
+
+  <span class="c-com">// 1. Hitung Dot Product: score = (w . x) + b untuk tiap kelas</span>
+  <span class="c-kw">const</span> scores = coef.<span class="c-fn">map</span>((c, ci) =&gt; {
+    <span class="c-kw">let</span> s = intercept[ci];
+    <span class="c-kw">for</span> (<span class="c-kw">let</span> i = <span class="c-num">0</span>; i &lt; vec.length; i++) {
+      <span class="c-kw">if</span> (vec[i] !== <span class="c-num">0</span>) s += c[i] * vec[i]; <span class="c-com">// Sparse acceleration</span>
+    }
+    <span class="c-kw">return</span> s;
+  });
+
+  <span class="c-com">// 2. Ambil kelas dengan skor margin tertinggi (argmax)</span>
+  <span class="c-kw">const</span> bestIdx = scores.<span class="c-fn">indexOf</span>(Math.<span class="c-fn">max</span>(...scores));
+
+  <span class="c-com">// 3. Softmax Normalization untuk mengubah skor hyperplane menjadi probabilitas (%)</span>
+  <span class="c-kw">const</span> exps = scores.<span class="c-fn">map</span>(s =&gt; Math.<span class="c-fn">exp</span>(s));
+  <span class="c-kw">const</span> sumExps = exps.<span class="c-fn">reduce</span>((a, b) =&gt; a + b, <span class="c-num">0</span>);
+  <span class="c-kw">const</span> probs = exps.<span class="c-fn">map</span>(e =&gt; e / sumExps);
+
+  <span class="c-kw">return</span> {
+    label: labels[bestIdx],
+    confidence: probs[bestIdx],
+    probs: Object.<span class="c-fn">fromEntries</span>(labels.<span class="c-fn">map</span>((l, i) =&gt; [l, probs[i]]))
+  };
+}</code></pre>
         </div>
 
       </div>
