@@ -131,28 +131,28 @@ def build_laporan_docx():
     doc.add_heading("2.1 Formulasi Matematis TF-IDF & Normalisasi L2 (Euclidean Norm)", level=2)
     doc.add_paragraph(
         "TF-IDF (Term Frequency - Inverse Document Frequency) adalah metode pembobotan statistik yang mengukur signifikansi relatif sebuah term t dalam dokumen d terhadap kumpulan korpus N dokumen:\n"
-        "1. TF(t, d) = f(t, d) / [ Σ_{t' in d} f(t', d) ]\n"
+        "1. TF(t, d) = f(t, d) / [ ∑_{t' ∈ d} f(t', d) ]\n"
         "2. IDF(t) = ln [ (1 + N) / (1 + df(t)) ] + 1\n"
-        "3. Bobot Mentah: v(t, d) = TF(t, d) * IDF(t)\n"
-        "4. Normalisasi L2 (Euclidean Norm): v_norm = v / sqrt(Σ v_i^2)\n"
-        "Akar kuadrat (sqrt) berfungsi sebagai normalisasi panjang vektor agar tweet pendek dan tweet panjang dinilai secara adil berdasarkan proporsi makna, bukan panjang karakter."
+        "3. Bobot Mentah: v(t, d) = TF(t, d) × IDF(t)\n"
+        "4. Normalisasi Euclidean L2: v_norm = v / ||v||₂ = v / √( ∑_{i=1}^{M} vᵢ² )\n"
+        "Simbol akar kuadrat (√) berfungsi sebagai normalisasi panjang Euclidean vektor panah (Teorema Pythagoras) agar tweet pendek dan tweet panjang dinilai secara adil berdasarkan proporsi makna, bukan panjang karakter."
     )
 
     doc.add_heading("2.2 Formulasi Multinomial Naive Bayes (MNB)", level=2)
     doc.add_paragraph(
         "Berdasarkan Teorema Bayes dengan asumsi independensi bersyarat fitur dan Laplace Smoothing α = 0.3:\n"
-        "P(c | d) ∝ P(c) * Π_{i=1}^{n} P(w_i | c)\n"
-        "P(w_i | c) = [ N_{w_i, c} + 0.3 ] / [ N_c + 0.3 * |V| ]\n"
-        "Klasifikasi: c_pred = argmax_c [ log P(c) + Σ log P(w_i | c) ]"
+        "P(c | d) ∝ P(c) × ∏_{i=1}^{n} P(wᵢ | c)\n"
+        "P(wᵢ | c) = [ N_{wᵢ, c} + 0.3 ] / [ N_c + 0.3 · |V| ]\n"
+        "Fungsi Klasifikasi: c* = argmax_{c ∈ C} [ ln P(c) + ∑_{i=1}^{n} ln P(wᵢ | c) ]"
     )
 
     doc.add_heading("2.3 Formulasi Linear Support Vector Machine (Linear SVM)", level=2)
     doc.add_paragraph(
-        "Linear SVM mencari hyperplane optimal w^T * x + b = 0 dengan margin maksimal 2 / ||w|| melalui formulasi optimasi soft-margin berbobot seimbang:\n"
-        "min_{w, b, ξ} [ (1/2) * ||w||^2 + C * Σ W_{y_i} * ξ_i ]\n"
-        "Subject to: y_i * ( w^T * x_i + b ) >= 1 - ξ_i,  ξ_i >= 0\n"
-        "Bobot Penyeimbang Kelas: W_c = N_total / [ K * N_c ] (K = 3 kelas)\n"
-        "Fungsi Keputusan (One-vs-Rest): c_pred = argmax_c [ w_c^T * x + b_c ]"
+        "Linear SVM mencari hyperplane optimal wᵀ · x + b = 0 dengan margin maksimal 2 / ||w|| melalui formulasi optimasi soft-margin berbobot seimbang:\n"
+        "min_{w, b, ξ} [ (1/2) · ||w||² + C · ∑_{i=1}^{N} W_{yᵢ} · ξᵢ ]\n"
+        "Subject to: yᵢ · ( wᵀ · xᵢ + b ) ≥ 1 - ξᵢ,  ξᵢ ≥ 0\n"
+        "Bobot Penyeimbang Kelas: W_c = N_total / [ K · N_c ] (K = 3 kelas)\n"
+        "Fungsi Keputusan (One-vs-Rest): c* = argmax_c [ w_cᵀ · x + b_c ]"
     )
 
     # BAB III: METODOLOGI & PERJALANAN DATA

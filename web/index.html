@@ -10,6 +10,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <!-- KaTeX for crisp mathematical formulas -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -246,23 +250,23 @@
             <h4 class="formula-title">1. TF-IDF (Pemberi Nilai Bobot Kata)</h4>
             <span class="formula-badge">Representasi Vektor</span>
           </div>
-          <div class="formula">
-1. TF (Frekuensi Kata)   : TF(t,d) = f(t,d) / Total_Kata_di_Tweet
-2. IDF (Keunikan Kata)   : IDF(t) = ln( (1 + N) / (1 + df(t)) ) + 1
-3. Bobot Mentah          : v(t,d) = TF(t,d) × IDF(t)
-4. Normalisasi L2 (Akar) : v_final = v / √(v₁² + v₂² + ... + vₙ²)
+          <div class="formula" style="font-size: 0.95rem; line-height: 1.8;">
+            <div>$$\text{TF}(t, d) = \frac{f(t, d)}{\sum_{t' \in d} f(t', d)}$$</div>
+            <div>$$\text{IDF}(t) = \ln\left(\frac{1 + N}{1 + \text{df}(t)}\right) + 1$$</div>
+            <div>$$\mathbf{v}(t, d) = \text{TF}(t, d) \times \text{IDF}(t)$$</div>
+            <div style="color: #34d399; font-weight: bold;">$$\mathbf{v}_{\text{norm}} = \frac{\mathbf{v}}{\|\mathbf{v}\|_2} = \frac{\mathbf{v}}{\sqrt{\sum_{i=1}^{M} v_i^2}}$$</div>
           </div>
           <div class="analogi-box">
             <div class="analogi-icon">🧸</div>
             <div class="analogi-content">
-              <h5>Kenapa Ada Akar (√ / Sqrt) Coy? (Analogi Anak 5 Tahun):</h5>
-              <p>Akar kuadrat (<strong>√</strong>) itu datangnya dari rumus <strong>Pythagoras / Panjang Garis Panah</strong>! Bayangin tweet pendek punya panah kecil 3 cm, tweet panjang punya panah gede 10 cm. Kalau gak di-akar, tweet panjang selalu menang cuma gara-gara cerewet! Jadi semua panah kita bagi dengan <em>panjang aslinya</em> √(v₁² + v₂²) biar semua panah panjangnya pas 1 cm dan dinilai adil!</p>
+              <h5>Kenapa Ada Simbol Akar Kuadrat (\(\sqrt{\dots}\))? (Analogi Anak 5 Tahun):</h5>
+              <p>Simbol akar kuadrat (<strong>\(\sqrt{\dots}\)</strong>) itu hukum panjang panah (<strong>Norma Euclidean L2 / Teorema Pythagoras</strong>)! Bayangin tweet pendek punya panah kecil panjang 3 cm, tweet panjang punya panah gede 10 cm. Kalau tidak dibagi akar panjangnya, tweet panjang selalu menang cuma gara-gara cerewet! Jadi semua panah kita bagi dengan <em>panjang aslinya</em> \(\sqrt{v_1^2 + v_2^2}\) biar semua panah tepat berukuran standar 1 cm dan dinilai secara adil berdasarkan proporsi makna!</p>
             </div>
           </div>
           <ul class="detail-list">
-            <li class="detail-item"><strong>TF (Term Frequency):</strong> Menghitung seberapa sering kata itu muncul dalam satu tweet.</li>
-            <li class="detail-item"><strong>IDF (Inverse Document Frequency):</strong> Memberi nilai mahal ke kata langka (contoh: <em>"solar"</em>) dan membuang kata pasaran (contoh: <em>"is"</em>, <em>"the"</em>).</li>
-            <li class="detail-item"><strong>Normalisasi L2 (Euclidean Norm / Sqrt):</strong> Menghitung panjang vektor √(Σ vᵢ²) agar tweet 5 kata vs tweet 50 kata dinilai murni dari makna, bukan panjang kalimat.</li>
+            <li class="detail-item"><strong>\(\text{TF}(t,d)\) (Term Frequency):</strong> Mengukur frekuensi kemunculan relatif kata \(t\) di dalam satu tweet \(d\).</li>
+            <li class="detail-item"><strong>\(\text{IDF}(t)\) (Inverse Document Frequency):</strong> Memberikan bobot tinggi untuk kata langka/spesifik (contoh: <em>"solar"</em>) dan bobot rendah untuk kata umum (contoh: <em>"is"</em>, <em>"the"</em>).</li>
+            <li class="detail-item"><strong>\(\|\mathbf{v}\|_2 = \sqrt{\sum v_i^2}\) (Normalisasi L2):</strong> Menghitung panjang Euclidean vektor agar representasi teks independen terhadap panjang tweet.</li>
           </ul>
         </div>
 
@@ -272,76 +276,74 @@
             <h4 class="formula-title">2. Multinomial Naive Bayes (Tebak Peluang Kata)</h4>
             <span class="formula-badge">Probabilistik</span>
           </div>
-          <div class="formula">
-P(c|d)   ∝ P(c) × Π P(wᵢ|c)
-P(wᵢ|c)  = (N(wᵢ,c) + α) / (N(c) + α|V|)
-Keputusan = arg max [ log P(c) + Σ log P(wᵢ|c) ]
-(Laplace Smoothing α = 0.3)
+          <div class="formula" style="font-size: 0.95rem; line-height: 1.8;">
+            <div>$$P(c \mid d) \propto P(c) \prod_{i=1}^{n} P(w_i \mid c)$$</div>
+            <div>$$P(w_i \mid c) = \frac{N_{w_i, c} + \alpha}{N_c + \alpha \cdot |V|}, \quad (\alpha = 0.3)$$</div>
+            <div>$$\hat{c} = \arg\max_{c \in C} \left[ \ln P(c) + \sum_{i=1}^{n} \ln P(w_i \mid c) \right]$$</div>
           </div>
           <div class="analogi-box">
             <div class="analogi-icon">🎲</div>
             <div class="analogi-content">
               <h5>Analogi Buat Anak 5 Tahun:</h5>
-              <p>Kayak kamu nebak isi kantong permen teman. Kalau kamu dengar kata <em>"senang"</em>, <em>"matahari"</em>, dan <em>"bersih"</em>, kantong mana yang paling mungkin? Pasti kantong permen <strong>Positif</strong>! Naive Bayes ngitung peluangnya dengan mengalikan probabilitas tiap kata satu per satu.</p>
+              <p>Kayak kamu nebak isi kantong permen teman. Kalau kamu dengar kata <em>"senang"</em>, <em>"matahari"</em>, dan <em>"bersih"</em>, kantong mana yang paling mungkin? Pasti kantong permen <strong>Positif</strong>! Naive Bayes menghitung peluang dengan mengalikan probabilitas setiap kata satu per satu.</p>
             </div>
           </div>
           <ul class="detail-list">
-            <li class="detail-item"><strong>Teorema Bayes:</strong> Mengubah fakta kata-kata yang muncul menjadi probabilitas sentimen (Positif, Netral, atau Negatif).</li>
-            <li class="detail-item"><strong>Laplace Smoothing (α = 0.3):</strong> Penyelamat jika ketemu kata baru yang belum pernah diajarkan, supaya nilainya tidak jadi nol mutlak.</li>
-            <li class="detail-item"><strong>Log-Domain:</strong> Perkalian diubah jadi penjumlahan logaritma biar komputer gak pusing ngitung angka desimal yang kelewat kecil.</li>
+            <li class="detail-item"><strong>Teorema Bayes:</strong> Mengubah observasi kata menjadi probabilitas posterior kelas sentimen (Positif, Netral, atau Negatif).</li>
+            <li class="detail-item"><strong>Laplace Smoothing (\(\alpha = 0.3\)):</strong> Mencegah probabilitas nol mutlak jika menjumpai kata langka yang belum ada di korpus latih.</li>
+            <li class="detail-item"><strong>Log-Domain (\(\ln\)):</strong> Mengonversi perkalian desimal kecil menjadi penjumlahan logaritma untuk menghindari *arithmetic underflow*.</li>
           </ul>
         </div>
 
         <!-- 3. Linear SVM -->
         <div class="formula-card">
           <div class="formula-header">
-            <h4 class="formula-title">3. Linear SVM (Garis Pembatas Paling Tegas)</h4>
+            <h4 class="formula-title">3. Linear SVM (Hyperplane &amp; Margin Maksimal)</h4>
             <span class="formula-badge">Model Juara (74,07%)</span>
           </div>
-          <div class="formula">
-min (1/2)||w||² + C × Σ (W_{yᵢ} × ξᵢ)
-s.t.  yᵢ(wᵀxᵢ + b) ≥ 1 - ξᵢ
-Keputusan = arg max [ w_cᵀx + b_c ]
-(Parameter: C = 0.5, class_weight='balanced')
+          <div class="formula" style="font-size: 0.95rem; line-height: 1.8;">
+            <div>$$\min_{\mathbf{w}, b, \boldsymbol{\xi}} \; \frac{1}{2} \|\mathbf{w}\|^2 + C \sum_{i=1}^{N} W_{y_i} \xi_i$$</div>
+            <div>$$\text{s.t.} \quad y_i (\mathbf{w}^T \mathbf{x}_i + b) \ge 1 - \xi_i, \quad \xi_i \ge 0$$</div>
+            <div>$$\hat{c} = \arg\max_{c \in \{-1, 0, 1\}} \left( \mathbf{w}_c^T \mathbf{x} + b_c \right)$$</div>
+            <div style="font-size: 0.8rem; color: #94a3b8;">Parameter: \(C = 0.5\), \(W_c = \frac{N}{3 \cdot N_c}\) (Class Balanced)</div>
           </div>
           <div class="analogi-box">
             <div class="analogi-icon">⚔️</div>
             <div class="analogi-content">
               <h5>Analogi Buat Anak 5 Tahun:</h5>
-              <p>Bayangin kamu lagi main benteng di pasir antara tim Hijau (senang) dan tim Merah (marah). SVM itu kayak kapten pintar yang ngegambar garis parit selebar-lebarnya di tengah, biar kedua tim gak tabrakan dan jarak amannya paling maksimal!</p>
+              <p>Bayangin kamu lagi main benteng di pasir antara tim Hijau (senang) dan tim Merah (marah). SVM itu kayak wasit pintar yang menggambar garis parit selebar-lebarnya di tengah, biar kedua tim tidak tabrakan dan jarak batas amannya paling maksimal!</p>
             </div>
           </div>
           <ul class="detail-list">
-            <li class="detail-item"><strong>Hyperplane & Margin:</strong> Garis pemisah yang mencari jarak aman terjauh (margin maksimal) antar kelompok opini.</li>
-            <li class="detail-item"><strong>Regularisasi C = 0.5:</strong> Menjaga keseimbangan antara garis yang rapi dan toleransi jika ada 1-2 kata nyeleneh.</li>
-            <li class="detail-item"><strong>Class Weight 'Balanced':</strong> Memberi perhatian ekstra pada kelas minoritas (negatif) agar tidak kalah suara dari kelas positif.</li>
+            <li class="detail-item"><strong>Hyperplane \(\mathbf{w}^T \mathbf{x} + b = 0\):</strong> Bidang pemisah optimal pada ruang 15.000 dimensi yang memaksimalkan margin \(2/\|\mathbf{w}\|\).</li>
+            <li class="detail-item"><strong>Penalti Reguler \(C = 0.5\):</strong> Mengatur trade-off antara kerapian margin dan toleransi error pada sampel yang tumpang tindih.</li>
+            <li class="detail-item"><strong>Bobot Seimbang \(W_{y_i}\):</strong> Memberi bobot penalti lebih besar pada kelas minoritas (negatif), mendongkrak recall dari 34,81% ke 60,13%.</li>
           </ul>
         </div>
 
         <!-- 4. Metrik Evaluasi -->
         <div class="formula-card">
           <div class="formula-header">
-            <h4 class="formula-title">4. Metrik Rapor Ujian (Cara Menguji Kepintaran AI)</h4>
+            <h4 class="formula-title">4. Metrik Evaluasi &amp; Kinerja Model</h4>
             <span class="formula-badge">Evaluasi Model</span>
           </div>
-          <div class="formula">
-Accuracy  = (TP + TN) / (Total Sampel)
-Precision = TP / (TP + FP)  [Ketepatan Tebakan]
-Recall    = TP / (TP + FN)  [Daya Ingat Menangkap Kasus]
-F1-Score  = 2 × (P × R) / (P + R)  [Keseimbangan Harmonis]
-Macro-Avg = (Nilai_Neg + Nilai_Net + Nilai_Pos) / 3
+          <div class="formula" style="font-size: 0.95rem; line-height: 1.8;">
+            <div>$$\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}$$</div>
+            <div>$$\text{Precision} = \frac{TP}{TP + FP}, \quad \text{Recall} = \frac{TP}{TP + FN}$$</div>
+            <div>$$\text{F1-Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}$$</div>
+            <div>$$\text{Macro F1} = \frac{F1_{\text{neg}} + F1_{\text{net}} + F1_{\text{pos}}}{3} = 65{,}81\%$$</div>
           </div>
           <div class="analogi-box">
             <div class="analogi-icon">🎯</div>
             <div class="analogi-content">
               <h5>Analogi Buat Anak 5 Tahun:</h5>
-              <p>Kalau kamu main petak umpet: <strong>Precision</strong> itu artinya kalau kamu bilang <em>"Aku ketemu Budi!"</em>, emang beneran Budi bukan pohon. <strong>Recall</strong> itu artinya dari 10 anak yang ngumpet, berapa anak yang berhasil kamu temukan. <strong>F1-Score</strong> itu nilai rapor gabungan keduanya!</p>
+              <p>Kalau kamu main petak umpet: <strong>Precision</strong> itu artinya kalau kamu teriak <em>"Aku ketemu Budi!"</em>, emang beneran Budi bukan pohon. <strong>Recall</strong> itu artinya dari 10 anak yang ngumpet, berapa anak yang berhasil kamu temukan. <strong>F1-Score</strong> itu nilai rapor gabungan keduanya!</p>
             </div>
           </div>
           <ul class="detail-list">
-            <li class="detail-item"><strong>Accuracy (74,07%):</strong> Persentase total tebakan yang benar dari 6.382 tweet ujian.</li>
-            <li class="detail-item"><strong>Recall:</strong> Kemampuan model mendeteksi tweet negatif tanpa terlewat satupun.</li>
-            <li class="detail-item"><strong>Macro F1 (65,81%):</strong> Menilai ketiga kelas secara adil tanpa menganaktirikan tweet negatif yang jumlahnya lebih sedikit.</li>
+            <li class="detail-item"><strong>Accuracy (74,07%):</strong> Persentase total tebakan benar dari 6.382 tweet sampel uji.</li>
+            <li class="detail-item"><strong>Recall:</strong> Kemampuan model mendeteksi seluruh tweet beropini kritis/negatif tanpa terlewat.</li>
+            <li class="detail-item"><strong>Macro F1 (65,81%):</strong> Menilai ketiga kelas secara adil tanpa terdistorsi dominasi kelas mayoritas pro-iklim.</li>
           </ul>
         </div>
 
@@ -922,7 +924,7 @@ export_data = {
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© 2024 SentimentGreen. Dataset: Twitter Climate Change Sentiment (Edward Qian, Kaggle).</span>
+        <span>© 2026 SentimentGreen. Dataset: Twitter Climate Change Sentiment (Edward Qian, Kaggle).</span>
         <span>Model offline · TF-IDF · SVM · Naive Bayes</span>
       </div>
     </div>
