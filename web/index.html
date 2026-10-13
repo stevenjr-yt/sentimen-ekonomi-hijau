@@ -24,6 +24,7 @@
         <li><a href="#analyze">Analisis</a></li>
         <li><a href="#dashboard">Dashboard</a></li>
         <li><a href="#methodology">Metodologi</a></li>
+        <li><a href="#downloads">Unduhan</a></li>
         <li><a href="#about">Tentang</a></li>
       </ul>
       <button class="btn-nav-cta" onclick="document.getElementById('analyze').scrollIntoView({behavior:'smooth'})">
@@ -260,6 +261,83 @@
     </div>
   </section>
 
+  <!-- ─── DOWNLOADS ──────────────────────────────────────────────── -->
+  <section class="section" id="downloads">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">📥 Unduhan Dokumen</div>
+        <h2 class="section-title">Download Dokumen Proyek</h2>
+        <p class="section-sub">Unduh laporan lengkap, paper jurnal, dan studi literatur dalam format PDF.</p>
+      </div>
+      <div class="downloads-grid">
+
+        <!-- Laporan -->
+        <div class="dl-card">
+          <div class="dl-icon-wrap dl-green">
+            <span class="dl-icon">📄</span>
+          </div>
+          <div class="dl-body">
+            <div class="dl-badge">Laporan Proyek</div>
+            <h3 class="dl-title">Laporan Teknis Lengkap</h3>
+            <p class="dl-desc">Laporan proyek lengkap: latar belakang, metodologi, hasil evaluasi model, analisis distribusi sentimen, dan kesimpulan. Disertai semua rumus matematika TF-IDF, Naive Bayes, dan SVM.</p>
+            <div class="dl-meta">
+              <span class="dl-tag">📊 5 Bab</span>
+              <span class="dl-tag">🧮 Rumus Lengkap</span>
+              <span class="dl-tag">📈 Hasil Evaluasi</span>
+            </div>
+          </div>
+          <a href="downloads/Laporan_Project.pdf" download="Laporan_Project_SentimentGreen.pdf" class="btn-dl" id="dlLaporan">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Unduh PDF
+          </a>
+        </div>
+
+        <!-- Paper Jurnal -->
+        <div class="dl-card">
+          <div class="dl-icon-wrap dl-blue">
+            <span class="dl-icon">📝</span>
+          </div>
+          <div class="dl-body">
+            <div class="dl-badge dl-badge-blue">Paper Jurnal</div>
+            <h3 class="dl-title">Paper Ilmiah – Format Jurnal</h3>
+            <p class="dl-desc">Artikel ilmiah format jurnal: abstrak Indonesia & Inggris, pendahuluan, metode penelitian, hasil & pembahasan, kesimpulan, dan daftar pustaka. Siap untuk publikasi akademik.</p>
+            <div class="dl-meta">
+              <span class="dl-tag">🔬 Metode Ilmiah</span>
+              <span class="dl-tag">📋 Format Jurnal</span>
+              <span class="dl-tag">📚 10 Referensi</span>
+            </div>
+          </div>
+          <a href="downloads/Paper_Jurnal.pdf" download="Paper_Jurnal_SentimentGreen.pdf" class="btn-dl btn-dl-blue" id="dlPaper">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Unduh PDF
+          </a>
+        </div>
+
+        <!-- Studi Literatur -->
+        <div class="dl-card">
+          <div class="dl-icon-wrap dl-purple">
+            <span class="dl-icon">📚</span>
+          </div>
+          <div class="dl-body">
+            <div class="dl-badge dl-badge-purple">Studi Literatur</div>
+            <h3 class="dl-title">Literature Review – Jurnal 2024</h3>
+            <p class="dl-desc">Tinjauan literatur 10 referensi terpilih (2024) tentang analisis sentimen isu lingkungan & ekonomi hijau. Mencakup gap analisis, tren metodologi, dan justifikasi pemilihan SVM sebagai model utama.</p>
+            <div class="dl-meta">
+              <span class="dl-tag">📖 10 Jurnal</span>
+              <span class="dl-tag">📅 2024</span>
+              <span class="dl-tag">🔍 Gap Analisis</span>
+            </div>
+          </div>
+          <a href="downloads/Studi_Literatur.pdf" download="Studi_Literatur_SentimentGreen.pdf" class="btn-dl btn-dl-purple" id="dlLiteratur">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Unduh PDF
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ─── ABOUT ─────────────────────────────────────────────────── -->
   <section class="section section-dark" id="about">
     <div class="container">
@@ -311,7 +389,13 @@
           <div>
             <h5>Sumber</h5>
             <a href="https://www.kaggle.com/datasets/edqian/twitter-climate-change-sentiment-dataset" target="_blank">Dataset Kaggle</a>
-            <a href="https://github.com" target="_blank">GitHub</a>
+            <a href="https://github.com/stevenjr-yt/sentimen-ekonomi-hijau" target="_blank">GitHub Repo</a>
+          </div>
+          <div>
+            <h5>Unduhan</h5>
+            <a href="#downloads" onclick="document.getElementById('downloads').scrollIntoView({behavior:'smooth'})">Laporan Proyek</a>
+            <a href="#downloads" onclick="document.getElementById('downloads').scrollIntoView({behavior:'smooth'})">Paper Jurnal</a>
+            <a href="#downloads" onclick="document.getElementById('downloads').scrollIntoView({behavior:'smooth'})">Studi Literatur</a>
           </div>
         </div>
       </div>
