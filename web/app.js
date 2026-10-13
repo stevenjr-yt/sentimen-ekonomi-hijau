@@ -14,8 +14,27 @@ let modelReady = false;
 window.addEventListener("DOMContentLoaded", async () => {
   setupNavScroll();
   setupCharCount();
+  setupScrollReveal();
   await initModel();
 });
+
+function setupScrollReveal() {
+  const elements = document.querySelectorAll(
+    ".section-header, .card, .metric-card, .method-card, .dl-card, .analogi-box, .formula-box, .table-card"
+  );
+  elements.forEach(el => el.classList.add("reveal-on-scroll"));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("revealed");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+
+  elements.forEach(el => observer.observe(el));
+}
 
 async function initModel() {
   try {

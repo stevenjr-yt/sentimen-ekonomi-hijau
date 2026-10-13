@@ -89,9 +89,10 @@ def build_laporan_docx():
 
     p_meta = doc.add_paragraph()
     p_meta.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    r_meta = p_meta.add_run("Disusun oleh: SteVenJr | Program Studi: Teknik Informatika / Sains Data\n"
+    r_meta = p_meta.add_run("Disusun oleh: SteVenJr | Departemen Ilmu Komputer, Fakultas Ilmu Komputer dan TI\n"
+                           "Laboratorium Sains Data, AI & NLP SentimentGreen | Tahun Akademik: 2026\n"
                            "Dataset: Twitter Climate Change Sentiment Dataset (Kaggle: Edward Qian)\n"
-                           "Aplikasi Web: https://sentimentgreen.vercel.app | Tahun: 2026\n")
+                           "Aplikasi Web: https://sentimentgreen.vercel.app | Repositori: github.com/stevenjr-yt/sentimen-ekonomi-hijau\n")
     r_meta.font.size = Pt(9)
     r_meta.font.color.rgb = COLOR_GRAY
 
@@ -220,7 +221,7 @@ def build_paper_docx():
 
     p_title = doc.add_paragraph()
     p_title.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    r_cat = p_title.add_run("PAPER PUBLIKASI ILMIAH\n")
+    r_cat = p_title.add_run("JURNAL ILMIAH ILMU KOMPUTER DAN SISTEM INFORMASI (JIKOMSI) - TAHUN 2026\n")
     r_cat.font.size = Pt(10)
     r_cat.font.color.rgb = COLOR_GRAY
 
@@ -231,9 +232,11 @@ def build_paper_docx():
 
     p_meta = doc.add_paragraph()
     p_meta.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    r_meta = p_meta.add_run("Penulis: SteVenJr | Afiliasi: Riset Sains Data & NLP SentimentGreen | Tahun: 2026\n"
-                           "Aplikasi Web: https://sentimentgreen.vercel.app | Repo: github.com/stevenjr-yt/sentimen-ekonomi-hijau\n")
-    r_meta.font.size = Pt(8.5)
+    r_meta = p_meta.add_run("SteVenJr (stevenjr.research@gmail.com)\n"
+                           "Departemen Ilmu Komputer, Fakultas Ilmu Komputer dan Teknologi Informasi\n"
+                           "Laboratorium Sains Data, Kecerdasan Artifisial, dan NLP | Tahun Publikasi: 2026\n"
+                           "Aplikasi Web: https://sentimentgreen.vercel.app | Repositori: github.com/stevenjr-yt/sentimen-ekonomi-hijau\n")
+    r_meta.font.size = Pt(9)
     r_meta.font.color.rgb = COLOR_GRAY
 
     doc.add_heading("ABSTRAK", level=2)

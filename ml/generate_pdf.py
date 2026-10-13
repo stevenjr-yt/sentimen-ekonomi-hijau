@@ -129,13 +129,14 @@ def build_laporan():
     # COVER & HEADER
     story += [
         Spacer(1, 0.5*cm),
-        Paragraph("LAPORAN AKHIR PROYEK SAINS DATA", S["title"]),
+        Paragraph("LAPORAN AKHIR PROYEK SAINS DATA & PEMROSESAN BAHASA ALAMI", S["title"]),
         Paragraph("ANALISIS SENTIMEN OPINI PUBLIK TERHADAP ISU EKONOMI HIJAU DAN PERUBAHAN IKLIM MENGGUNAKAN TF-IDF, MULTINOMIAL NAIVE BAYES, DAN LINEAR SUPPORT VECTOR MACHINE", S["subtitle"]),
         hr(),
-        Paragraph("<b>Disusun oleh:</b> SteVenJr | <b>Program Studi:</b> Teknik Informatika / Sains Data", S["meta"]),
-        Paragraph("<b>Dataset:</b> Twitter Climate Change Sentiment Dataset (Kaggle: Edward Qian, 2022)", S["meta"]),
+        Paragraph("<b>Disusun oleh:</b> SteVenJr | <b>Program Studi:</b> Ilmu Komputer / Sains Data & Kecerdasan Artifisial", S["meta"]),
+        Paragraph("<b>Fakultas:</b> Ilmu Komputer dan Teknologi Informasi | <b>Tahun Akademik:</b> 2026", S["meta"]),
+        Paragraph("<b>Dataset:</b> Twitter Climate Change Sentiment Dataset (Kaggle: Edward Qian)", S["meta"]),
         Paragraph("<b>Repositori Kode & Data:</b> github.com/stevenjr-yt/sentimen-ekonomi-hijau", S["meta"]),
-        Paragraph("<b>Aplikasi Web Interaktif:</b> https://sentimentgreen.vercel.app | <b>Tahun:</b> 2024", S["meta"]),
+        Paragraph("<b>Aplikasi Web Interaktif:</b> https://sentimentgreen.vercel.app | <b>Tahun Rilis:</b> 2026", S["meta"]),
         Spacer(1, 0.4*cm),
     ]
 
@@ -465,11 +466,14 @@ def build_paper():
     # JUDUL & METADATA PAPER
     story += [
         Spacer(1, 0.4*cm),
-        Paragraph("PAPER PUBLIKASI ILMIAH", S["caption"]),
+        Paragraph("JURNAL ILMIAH ILMU KOMPUTER DAN SISTEM INFORMASI (JIKOMSI)", S["caption"]),
         Paragraph("Komparasi Empiris Multinomial Naive Bayes dan Linear Support Vector Machine untuk Analisis Sentimen Opini Publik terhadap Isu Ekonomi Hijau pada Twitter", S["title"]),
         hr(),
-        Paragraph("<b>Penulis:</b> SteVenJr | <b>Afiliasi:</b> Riset Sains Data & NLP SentimentGreen | <b>Tahun:</b> 2024", S["meta"]),
-        Paragraph("<b>Kontak:</b> github.com/stevenjr-yt/sentimen-ekonomi-hijau | <b>Aplikasi Demo:</b> https://sentimentgreen.vercel.app", S["meta"]),
+        Paragraph("<b>SteVenJr<sup>1</sup></b>", S["subtitle"]),
+        Paragraph("<sup>1</sup>Departemen Ilmu Komputer, Fakultas Ilmu Komputer dan Teknologi Informasi<br/>"
+                  "Laboratorium Sains Data, Kecerdasan Artifisial, dan Natural Language Processing<br/>"
+                  "<i>E-mail korespondensi: stevenjr.research@gmail.com</i> | <b>Tahun Publikasi: 2026</b>", S["meta"]),
+        Paragraph("<b>Aplikasi Web:</b> https://sentimentgreen.vercel.app | <b>Repositori:</b> github.com/stevenjr-yt/sentimen-ekonomi-hijau", S["meta"]),
         Spacer(1, 0.3*cm),
 
         Paragraph("ABSTRAK", S["h2"]),
@@ -588,11 +592,11 @@ def build_literatur():
     # COVER & HEADER
     story += [
         Spacer(1, 0.4*cm),
-        Paragraph("SYSTEMATIC LITERATURE REVIEW & RESEARCH GAP ANALYSIS", S["caption"]),
-        Paragraph("Kajian Komparatif Sistematis Metodologi Analisis Sentimen Isu Lingkungan, Energi Bersih, dan Ekonomi Hijau: Pemetaan Komparasi Algoritma dan Kesenjangan Riset Terkini (2024)", S["title"]),
+        Paragraph("SYSTEMATIC LITERATURE REVIEW &amp; RESEARCH GAP ANALYSIS", S["caption"]),
+        Paragraph("Kajian Komparatif Sistematis Metodologi Analisis Sentimen Isu Lingkungan, Energi Bersih, dan Ekonomi Hijau: Pemetaan Komparasi Algoritma dan Kesenjangan Riset Terkini (2024–2026)", S["title"]),
         hr(),
-        Paragraph("<b>Penyusun:</b> SteVenJr | <b>Afiliasi:</b> Riset Sains Data & Pemrosesan Bahasa Alami SentimentGreen | <b>Tahun:</b> 2024", S["meta"]),
-        Paragraph("<b>Publikasi Terbuka:</b> https://sentimentgreen.vercel.app | <b>Repositori Data & Kode:</b> github.com/stevenjr-yt/sentimen-ekonomi-hijau", S["meta"]),
+        Paragraph("<b>Penyusun:</b> SteVenJr | <b>Afiliasi:</b> Departemen Ilmu Komputer, Laboratorium Sains Data &amp; NLP SentimentGreen | <b>Tahun:</b> 2026", S["meta"]),
+        Paragraph("<b>Publikasi Terbuka:</b> https://sentimentgreen.vercel.app | <b>Repositori Data &amp; Kode:</b> github.com/stevenjr-yt/sentimen-ekonomi-hijau", S["meta"]),
         Spacer(1, 0.3*cm),
 
         Paragraph("RINGKASAN EKSEKUTIF", S["h2"]),
