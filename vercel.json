@@ -2,8 +2,16 @@
   "version": 2,
   "name": "sentimentgreen",
   "public": true,
-  "buildCommand": "",
   "outputDirectory": "web",
+  "headers": [
+    {
+      "source": "/downloads/(.*\\.pdf)",
+      "headers": [
+        { "key": "Content-Type", "value": "application/pdf" },
+        { "key": "Content-Disposition", "value": "attachment" }
+      ]
+    }
+  ],
   "routes": [
     { "src": "/(.*)", "dest": "/$1" }
   ]
