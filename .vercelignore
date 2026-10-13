@@ -1,8 +1,9 @@
-ml/
-models/
-results/
-data/
-docs/
-*.pkl
+.git
+.github
+data
+docs
+models/*.pkl
 *.py
+*.pyc
 requirements.txt
+README.md

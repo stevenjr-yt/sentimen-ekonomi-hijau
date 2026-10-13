@@ -13,11 +13,5 @@ __pycache__/
 # Large model files – keep only JSON for browser
 models/*.pkl
 
-# Raw data (too large for git)
-data/*.zip
-data/*.csv
-
-# Keep generated results (small)
-!results/*.png
-!results/*.json
-!results/*.csv
+# Vercel folder
+.vercel
