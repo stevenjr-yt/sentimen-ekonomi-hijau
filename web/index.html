@@ -24,18 +24,25 @@
         <span class="brand-icon">🌿</span>
         <span>SentimentGreen</span>
       </a>
-      <ul class="nav-links">
-        <li><a href="#analyze">Analisis</a></li>
-        <li><a href="#dashboard">Dashboard</a></li>
-        <li><a href="#methodology">Metodologi</a></li>
-        <li><a href="#models-code">Model &amp; Koding</a></li>
-        <li><a href="#literatur">Studi Literatur</a></li>
-        <li><a href="#downloads">Unduhan</a></li>
-        <li><a href="#about">Tentang</a></li>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#analyze" onclick="closeMobileMenu()">Analisis</a></li>
+        <li><a href="#dashboard" onclick="closeMobileMenu()">Dashboard</a></li>
+        <li><a href="#methodology" onclick="closeMobileMenu()">Metodologi</a></li>
+        <li><a href="#models-code" onclick="closeMobileMenu()">Model &amp; Koding</a></li>
+        <li><a href="#literatur" onclick="closeMobileMenu()">Studi Literatur</a></li>
+        <li><a href="#downloads" onclick="closeMobileMenu()">Unduhan</a></li>
+        <li><a href="#about" onclick="closeMobileMenu()">Tentang</a></li>
       </ul>
-      <button class="btn-nav-cta" onclick="document.getElementById('analyze').scrollIntoView({behavior:'smooth'})">
-        Coba Sekarang
-      </button>
+      <div class="nav-actions">
+        <button class="btn-nav-cta" onclick="document.getElementById('analyze').scrollIntoView({behavior:'smooth'}); closeMobileMenu();">
+          Coba Sekarang
+        </button>
+        <button class="btn-burger" id="btnBurger" onclick="toggleMobileMenu()" aria-label="Menu navigasi">
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+        </button>
+      </div>
     </div>
   </nav>
 

@@ -410,3 +410,23 @@ function switchCodeTab(tabId, btn) {
     else if (tabId === "tab-infer") tag.textContent = "JavaScript (ES6) / Math Vector";
   }
 }
+
+// ── Mobile Menu Handler ───────────────────────────────────────────
+function toggleMobileMenu() {
+  const burger = document.getElementById("btnBurger");
+  const navLinks = document.getElementById("navLinks");
+  if (burger && navLinks) {
+    burger.classList.toggle("active");
+    navLinks.classList.toggle("mobile-open");
+  }
+}
+
+function closeMobileMenu() {
+  const burger = document.getElementById("btnBurger");
+  const navLinks = document.getElementById("navLinks");
+  if (burger && navLinks) {
+    burger.classList.remove("active");
+    navLinks.classList.remove("mobile-open");
+  }
+}
+

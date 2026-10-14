@@ -71,12 +71,45 @@ body {
   transition: all 0.2s;
 }
 .nav-links a:hover { background: var(--surface2); color: var(--text); }
+.nav-actions { display: flex; align-items: center; gap: 12px; }
 .btn-nav-cta {
   background: var(--green); color: #000; font-weight: 600; font-size: 0.85rem;
   padding: 8px 18px; border-radius: 8px; border: none; cursor: pointer;
   transition: all 0.2s;
 }
 .btn-nav-cta:hover { background: var(--green2); transform: translateY(-1px); }
+
+/* Hamburger Button */
+.btn-burger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 32px;
+  height: 22px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 105;
+}
+.burger-bar {
+  height: 2.5px;
+  width: 100%;
+  background: var(--text);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+.btn-burger.active .burger-bar:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+  background: var(--green);
+}
+.btn-burger.active .burger-bar:nth-child(2) {
+  opacity: 0;
+}
+.btn-burger.active .burger-bar:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+  background: var(--green);
+}
 
 /* ── HERO ── */
 .hero {
@@ -688,5 +721,176 @@ code {
 /* Subtle glowing pulse on result badge */
 .sentiment-badge {
   animation: glowPulse 3s ease-in-out infinite;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE DESIGN (HP, TABLET, MOBILE FRIENDLY)
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Tablet & Small Laptops (max-width: 992px) ── */
+@media (max-width: 992px) {
+  .btn-burger { display: flex; }
+  .btn-nav-cta { display: none; }
+  
+  .nav-links {
+    position: fixed;
+    top: 64px; left: 0; right: 0;
+    background: rgba(6, 11, 18, 0.98);
+    backdrop-filter: blur(25px);
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    padding: 24px;
+    gap: 12px;
+    transform: translateY(-150%);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+    z-index: 99;
+  }
+  .nav-links.mobile-open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .nav-links a {
+    display: block;
+    padding: 12px 18px;
+    font-size: 1.05rem;
+    border-radius: 8px;
+    border: 1px solid transparent;
+  }
+  .nav-links a:hover {
+    background: rgba(52, 211, 153, 0.1);
+    border-color: rgba(52, 211, 153, 0.25);
+    color: var(--green);
+  }
+
+  .charts-row { grid-template-columns: 1fr; }
+  .formula-grid { grid-template-columns: 1fr; }
+  .downloads-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── Mobile Phones (max-width: 768px) ── */
+@media (max-width: 768px) {
+  .section { padding: 60px 16px; }
+  .hero { padding: 90px 16px 48px; min-height: auto; }
+  
+  .hero-title {
+    font-size: 2.2rem;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .hero-sub {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 28px;
+  }
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    margin-bottom: 36px;
+  }
+  .hero-actions button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    width: 100%;
+  }
+  .stat-divider { display: none; }
+  .stat {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 10px;
+  }
+  .stat-num { font-size: 1.45rem; }
+  .stat-label { font-size: 0.72rem; }
+
+  .section-header { margin-bottom: 36px; }
+  .section-title { font-size: 1.7rem; }
+  .section-sub { font-size: 0.88rem; }
+
+  .analyze-grid { grid-template-columns: 1fr; }
+  .card { padding: 18px; }
+
+  /* Model & Code Section */
+  .code-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .code-tabs {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .code-tab-btn {
+    flex: 1 1 auto;
+    text-align: center;
+    padding: 8px 10px;
+    font-size: 0.75rem;
+  }
+  .code-content {
+    font-size: 0.75rem;
+    padding: 12px;
+  }
+
+  /* Table Horizontal Scrolling */
+  .table-card {
+    border-radius: var(--radius-sm);
+    padding: 14px;
+  }
+  .table-card table {
+    min-width: 650px; /* guarantees nice horizontal scrollbar on phones */
+  }
+
+  /* Downloads Grid */
+  .downloads-grid { grid-template-columns: 1fr; }
+  .dl-card { padding: 20px; }
+
+  /* Math Formula Card on Mobile */
+  .formula {
+    font-size: 0.82rem !important;
+    padding: 10px 12px;
+    overflow-x: auto;
+  }
+  .katex-display {
+    margin: 0.5em 0 !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  .analogi-box {
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+  }
+}
+
+/* ── Small Mobile Phones (max-width: 480px) ── */
+@media (max-width: 480px) {
+  .hero-title { font-size: 1.85rem; }
+  .section-title { font-size: 1.45rem; }
+  .brand-icon { font-size: 1.2rem; }
+  .nav-brand span:last-child { font-size: 1rem; }
+  
+  .sentiment-badge {
+    font-size: 0.82rem;
+    padding: 4px 12px;
+  }
+  .result-conf { font-size: 0.76rem; }
+  
+  .prob-row { font-size: 0.76rem; }
+  .prob-label { width: 50px; }
+  
+  .btn-view-online, .btn-dl, .btn-dl-secondary {
+    font-size: 0.78rem !important;
+    padding: 8px 10px !important;
+  }
 }
 
